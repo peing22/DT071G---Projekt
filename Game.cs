@@ -7,15 +7,13 @@ using System.Text.Json;
 
 internal class Game
 {
-    // Skapar ny instans med lista av spelare
+    // Skapar en privat statisk lista av Player-objekt
     private static List<Player> Players = new();
 
-    /*
-    Statisk metod för att läsa ut och deserialisera innehåll från en JSON-fil 
-    till listan med spelare, förutsatt att JSON-filen exixterar.
-    */
-    public static void LoadPlayers()
+    // Konstruktor som körs när en instans av klassen "Game" skapas
+    public Game()
     {
+        // Om JSON-filen existerar deserialiseras innehållet till listan med Player-objekt
         if (File.Exists("savedgames.json"))
         {
             string json = File.ReadAllText("savedgames.json");
@@ -42,13 +40,10 @@ internal class Game
                 Write("Ogiltigt namn! Tryck på valfri tangent...");
                 ReadKey();
             }
-            // Om namn är korrekt angivet anropas metod för att kunna räkna antalet sparade spelare och sätta värde för spelarens id
+            // Om namn är korrekt angivet sätts värden för spelarens id och namn
             else
-            { 
-                LoadPlayers();
+            {
                 Player.CurrentPlayer.Id = Players.Count + 1;
-
-                // Sätter värde för spelarens namn
                 Player.CurrentPlayer.Name = name;
 
                 // isInputValid sätts till true för att stoppa loopen
@@ -68,9 +63,8 @@ internal class Game
     // Statisk metod för att ladda ett sparat spel
     public static void LoadGame()
     {
-        // Rensar konsol och anropar metod
+        // Rensar konsol
         Clear();
-        LoadPlayers();
 
         // Om antalet sparade spelare är noll skrivs meddelande ut
         if (Players.Count == 0)
@@ -123,9 +117,6 @@ internal class Game
     // Statisk metod för att spara ett spel
     public static void SaveGame()
     {
-        // Anropar metod
-        LoadPlayers();
-
         // Om CurrentPlayer redan existerar i listan med spelare ersätts den befintliga instansen
         var existingPlayer = Players.Find(p => p.Id == Player.CurrentPlayer.Id);
         if (existingPlayer != null)

@@ -25,6 +25,9 @@ ResetColor();
 Write("Tryck på valfri tangent...");
 ReadKey();
 
+// Skapar en ny instans av klassen "Game" för att konstruktorn ska köras
+Game game = new();
+
 // Skapar en loop för startmenyn
 while (true)
 {
