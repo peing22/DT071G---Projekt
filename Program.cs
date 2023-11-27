@@ -1,4 +1,4 @@
-﻿// Importerar klass för att slippa upprepa "Console".
+﻿// Importerar klass för att slippa upprepa "Console"
 using static System.Console;
 
 // Rensar konsol och lagrar en ASCII-designad textsträng i en variabel
@@ -22,20 +22,18 @@ WriteLine(title);
 ResetColor();
 
 // Ber användaren trycka på valfri tangent för att komma vidare
-Game.Print("  Välkommen till Titel! Tryck på valfri tangent...");
+Write("Tryck på valfri tangent...");
 ReadKey();
 
-// Skapar en loop som håller gränssnittet igång tills programmet avslutas
+// Skapar en loop för startmenyn
 while (true)
 {
-    // Rensar konsol och skriver ut meny
+    // Rensar konsol, skriver ut startmeny och efterfrågar inmatning
     Clear();
     WriteLine("Vad vill du göra?\n");
-    WriteLine("1. Starta ett nytt spel");
-    WriteLine("2. Ladda ett sparat spel");
-    WriteLine("3. Avsluta programmet\n");
-
-    // Efterfrågar inmatning
+    WriteLine("1. Starta nytt spel");
+    WriteLine("2. Ladda sparat spel");
+    WriteLine("3. Avsluta\n");
     Write("Välj ett alternativ (1-3): ");
 
     // Om inmatning är en siffra körs switch-satsen
@@ -50,12 +48,11 @@ while (true)
                 Game.LoadGame();
                 break;
             case 3:
-                Clear();
                 Game.Quit();
                 break;
             default:
                 Clear();
-                Game.Print("\nOgiltigt alternativ! Tryck på valfri tangent...");
+                Write("Ogiltigt alternativ! Tryck på valfri tangent...");
                 ReadKey();
                 break;
         }
@@ -64,7 +61,7 @@ while (true)
     else
     {
         Clear();
-        Game.Print("\nOgiltigt alternativ! Tryck på valfri tangent...");
+        Write("Ogiltigt alternativ! Tryck på valfri tangent...");
         ReadKey();
     }
 }

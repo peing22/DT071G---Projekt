@@ -7,6 +7,7 @@ internal class Player
     public static Player CurrentPlayer = new();
 
     // Egenskaper som kan returnera och tilldelas värden
-    public string? Name { get; set; }
     public int Id { get; set; }
+    public string? Name { get; set; }
+    public int Level { get; set; } = 1;
 }
