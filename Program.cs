@@ -4,25 +4,32 @@ using static System.Console;
 // Rensar konsol och lagrar en ASCII-designad textsträng i en variabel
 Clear();
 string title = @"
-        
-    ███      ▄█      ███        ▄████████  ▄█       
-▀█████████▄ ███  ▀█████████▄   ███    ███ ███       
-   ▀███▀▀██ ███▌    ▀███▀▀██   ███    █▀  ███       
-    ███   ▀ ███▌     ███   ▀  ▄███▄▄▄     ███       
-    ███     ███▌     ███     ▀▀███▀▀▀     ███       
-    ███     ███      ███       ███    █▄  ███       
-    ███     ███      ███       ███    ███ ███▌    ▄ 
-   ▄████▀   █▀      ▄████▀     ██████████ █████▄▄██ 
-                                          ▀         
+   ██████  ██ ▄█▀ █    ██   ▄████   ▄████  ▒█████   ██▀███   ███▄    █  ▄▄▄        ██████    
+ ▒██    ▒  ██▄█▒  ██  ▓██▒ ██▒ ▀█▒ ██▒ ▀█▒▒██▒  ██▒▓██ ▒ ██▒ ██ ▀█   █ ▒████▄    ▒██    ▒    
+ ░ ▓██▄   ▓███▄░ ▓██  ▒██░▒██░▄▄▄░▒██░▄▄▄░▒██░  ██▒▓██ ░▄█ ▒▓██  ▀█ ██▒▒██  ▀█▄  ░ ▓██▄      
+   ▒   ██▒▓██ █▄ ▓▓█  ░██░░▓█  ██▓░▓█  ██▓▒██   ██░▒██▀▀█▄  ▓██▒  ▐▌██▒░██▄▄▄▄██   ▒   ██▒   
+ ▒██████▒▒▒██▒ █▄▒▒█████▓ ░▒▓███▀▒░▒▓███▀▒░ ████▓▒░░██▓ ▒██▒▒██░   ▓██░ ▓█   ▓██▒▒██████▒▒   
+ ▒ ▒▓▒ ▒ ░▒ ▒▒ ▓▒ ▒▓▒ ▒ ▒  ░▒   ▒  ░▒   ▒ ░ ▒░▒░▒░ ░ ▒▓ ░▒▓░░ ▒░   ▒ ▒  ▒▒   ▓▒█░▒ ▒▓▒ ▒ ░   
+ ░ ░▒  ░ ░  ░▒ ▒  ░▒░ ░ ░   ░   ░   ░   ░   ░ ▒ ▒░   ░▒ ░ ▒░░ ░░   ░ ▒░  ▒   ▒▒ ░  ░▒  ░ ░   
+    ░  ░    ░  ░  ░     ░   ░       ░         ░ ▒    ░░   ░    ░     ░   ░   ▒      ░  ░        
+                                                                                             
+        ███▄ ▄███▒▒██   ██▓  ██████ ▄▄▄█████▒▒█████  ██▀███   ██▓ █    ██  ███▄ ▄███▓        
+       ▓██▒▀█▀ ██▒ ▒██  ██▒▒██    ▒ ▓  ██▒ ▓░▒█   ▀ ▓██ ▒ ██▒▓██▒ ██  ▓██▒▓██▒▀█▀ ██▒        
+       ▓██    ▓██░  ▒██ ██░░ ▓██▄   ▒ ▓██░ ▒░▒███   ▓██ ░▄█ ▒▒██▒▓██  ▒██░▓██    ▓██░        
+       ▒██    ▒██   ░ ▐██▒░  ▒   ██▒░ ▓██▓ ░ ▒▓█  ▄ ▒██▀▀█▄  ░██░▓▓█  ░██░▒██    ▒██         
+       ▒██▒   ░██▒  ░ ██▒░░▒██████▒▒  ▒██▒ ░ ░▒████▒░██▓ ▒██▒░██░▒▒█████▓ ▒██▒   ░██▒        
+       ░ ▒░   ░  ░   ██░░  ▒ ▒▓▒ ▒ ░  ▒ ░░   ░░ ▒░ ░░ ▒▓ ░▒▓░░▓  ░▒▓▒ ▒ ▒ ░ ▒░   ░  ░        
+       ░  ░      ░ ▓██ ░   ░ ░▒  ░ ░    ░     ░ ░  ░  ░▒ ░ ▒░ ▒   ░▒░ ░ ░ ░  ░   ░          
+                   ░ ▒        ░  ░    ░         ░     ░    ░  ▒    ░      ░                        
         ";
 
 // Ändrar förgrundsfärg i konsol, skriver ut textsträng och återställer förgrundsfärg
-ForegroundColor = ConsoleColor.DarkMagenta;
+ForegroundColor = ConsoleColor.DarkGray;
 WriteLine(title);
 ResetColor();
 
 // Ber användaren trycka på valfri tangent för att komma vidare
-Write("Tryck på valfri tangent...");
+Write("                       Tryck på valfri tangent för att starta spelet...");
 ReadKey();
 
 // Skapar en ny instans av klassen "Game" för att konstruktorn ska köras
@@ -33,10 +40,12 @@ while (true)
 {
     // Rensar konsol, skriver ut startmeny och efterfrågar inmatning
     Clear();
-    WriteLine("Vad vill du göra?\n");
-    WriteLine("1. Starta nytt spel");
-    WriteLine("2. Ladda sparat spel");
-    WriteLine("3. Avsluta\n");
+    WriteLine("----------------------------");
+    WriteLine("      S P E L M E N Y       ");
+    WriteLine("----------------------------\n");
+    WriteLine("    1. Starta nytt spel");
+    WriteLine("    2. Ladda sparat spel");
+    WriteLine("    3. Avsluta\n");
     Write("Välj ett alternativ (1-3): ");
 
     // Om inmatning är en siffra körs switch-satsen

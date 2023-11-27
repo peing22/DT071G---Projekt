@@ -51,14 +51,14 @@ internal class Game
 
                 // Rensar konsol och skriver ut inledande story
                 Clear();
-                Print("Du vaknar upp i en dimmig skog och har ingen aning om hur du hamnade där. \n");
-                Print($"Ditt minne känns suddigt, men du vet i alla fall att du heter {Player.CurrentPlayer.Name}. \n\n");
-                Print("En mystisk röst hörs i vinden och uppmanar dig att följa stigen framåt...");
+                Print("Du vaknar upp i en dimmig skog och har ingen aning om hur du hamnade där, \n");
+                Print($"men du kommer åtminstone ihåg att du heter {Player.CurrentPlayer.Name}. \n\n");
+                Print("En mystisk röst hörs i vinden. Den uppmanar dig att följa stigen framåt...");
                 ReadKey();
                 Clear();
-                Print("Efter att ha vandrat en stund genom den täta skogen, når du en gammal \n");
-                Print("stenport. Porten öppnas långsamt när du närmar dig, och du stiger in \n");
-                Print("i en värld där skuggorna tycks leva sitt eget liv. \n\n");
+                Print("Efter att ha vandrat en stund genom den dimmiga skogen, når du en gammal \n");
+                Print("stenport. Porten öppnas långsamt när du närmar dig, och du stiger in i en \n");
+                Print("värld där skuggorna tycks leva sitt eget liv. \n\n");
                 Print("Din uppgift är att utforska denna mystiska värld, avslöja dess \n");
                 Print("hemligheter och övervinna de faror som lurar i skuggorna...");
                 ReadKey();
@@ -85,11 +85,14 @@ internal class Game
             bool isChoiceValid = false;
             while (!isChoiceValid)
             {
-                // Skriver ut sparade spel och efterfrågar inmatning
-                WriteLine("Sparade spel:\n");
+                // Rensar konsol, skriver ut sparade spel och efterfrågar inmatning
+                Clear();
+                WriteLine("----------------------------");
+                WriteLine("   S P A R A D E  S P E L   ");
+                WriteLine("----------------------------\n");
                 for (int i = 0; i < Players.Count; i++)
                 {
-                    WriteLine($"{i + 1}. {Players[i].Name} (level {Players[i].Level})");
+                    WriteLine($"    {i + 1}. {Players[i].Name} (level {Players[i].Level})");
                 }
                 Write($"\nVälj ett alternativ (1-{Players.Count}): ");
 
@@ -131,23 +134,28 @@ internal class Game
         switch (currentLevel)
         {
             case 1:
-                Write("Level 1 - Skogens hemligheter...");
+                // Skapar en ny instans av klassen "LevelOne" och skickar med namn som parameter
+                LevelOne levelOne = new("Level 1 - Skogens hemligheter");
+
+                // Skriver ut namn och beskrivning för level
+                Write($"{levelOne.Name}\n\n");
+                levelOne.LevelDescript();
                 ReadKey();
                 break;
             case 2:
-                Write("Spelar Level 2...");
+                Write("Level 2...");
                 ReadKey();
                 break;
             case 3:
-                Write("Spelar Level 3...");
+                Write("Level 3...");
                 ReadKey();
                 break;
             case 4:
-                Write("Spelar Level 4...");
+                Write("Level 4...");
                 ReadKey();
                 break;
             case 5:
-                Write("Spelar Level 5...");
+                Write("Level 5...");
                 ReadKey();
                 break;
         }
