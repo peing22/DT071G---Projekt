@@ -51,7 +51,7 @@ while (true)
                 Game.LoadGame();
                 break;
             case 3:
-                Game.Quit();
+                Game.QuitGame();
                 break;
             default:
                 Clear();

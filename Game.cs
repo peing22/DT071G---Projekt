@@ -30,7 +30,7 @@ internal class Game
         {
             // Rensar konsol, efterfrågar användarens namn och sparar värde i variabel
             Clear();
-            Write("Ange ditt namn: ");
+            Write("Ge din spelkaraktär ett namn: ");
             string? name = ReadLine();
 
             // Om namn är null, tomt eller blanksteg skrivs felmeddelande ut och en ny iteration av loopan startas
@@ -49,13 +49,22 @@ internal class Game
                 // isInputValid sätts till true för att stoppa loopen
                 isInputValid = true;
 
-                // Rensar konsol och skriver ut inledning...
+                // Rensar konsol och skriver ut inledande story
                 Clear();
-                Print($"Hej {Player.CurrentPlayer.Name}! Berättelse om spelet...");
+                Print("Du vaknar upp i en dimmig skog och har ingen aning om hur du hamnade där. \n");
+                Print($"Ditt minne känns suddigt, men du vet i alla fall att du heter {Player.CurrentPlayer.Name}. \n\n");
+                Print("En mystisk röst hörs i vinden och uppmanar dig att följa stigen framåt...");
+                ReadKey();
+                Clear();
+                Print("Efter att ha vandrat en stund genom den täta skogen, når du en gammal \n");
+                Print("stenport. Porten öppnas långsamt när du närmar dig, och du stiger in \n");
+                Print("i en värld där skuggorna tycks leva sitt eget liv. \n\n");
+                Print("Din uppgift är att utforska denna mystiska värld, avslöja dess \n");
+                Print("hemligheter och övervinna de faror som lurar i skuggorna...");
                 ReadKey();
 
                 // Anropar metod
-                GameMenu();
+                PlayGame();
             }
         }
     }
@@ -63,18 +72,16 @@ internal class Game
     // Statisk metod för att ladda ett sparat spel
     public static void LoadGame()
     {
-        // Rensar konsol
+        // Rensar konsol och om antalet sparade spelare är noll skrivs meddelande ut
         Clear();
-
-        // Om antalet sparade spelare är noll skrivs meddelande ut
         if (Players.Count == 0)
         {
             Write("Det finns inga sparade spel. Tryck på valfri tangent...");
+            ReadKey();
         }
-        // Om antalet spelare inte är noll
+        // Om antalet spelare inte är noll körs while-loopen så länge isChoiceValid är false
         else
         {
-            // Så länge isChoiceValid är false körs while-loopen
             bool isChoiceValid = false;
             while (!isChoiceValid)
             {
@@ -109,9 +116,41 @@ internal class Game
             ReadKey();
 
             // Anropar metod
-            GameMenu();
+            PlayGame();
         }
-        ReadKey();
+    }
+
+    // Statisk metod för att spela olika nivåer av spelet
+    public static void PlayGame()
+    {
+        // Rensar konsol och lagrar aktuell level i en variabel
+        Clear();
+        int currentLevel = Player.CurrentPlayer.Level;
+
+        // Kör kodblock utifrån spelarens level
+        switch (currentLevel)
+        {
+            case 1:
+                Write("Level 1 - Skogens hemligheter...");
+                ReadKey();
+                break;
+            case 2:
+                Write("Spelar Level 2...");
+                ReadKey();
+                break;
+            case 3:
+                Write("Spelar Level 3...");
+                ReadKey();
+                break;
+            case 4:
+                Write("Spelar Level 4...");
+                ReadKey();
+                break;
+            case 5:
+                Write("Spelar Level 5...");
+                ReadKey();
+                break;
+        }
     }
 
     // Statisk metod för att spara ett spel
@@ -135,7 +174,7 @@ internal class Game
     }
 
     // Statisk metod för att avsluta programmet
-    public static void Quit()
+    public static void QuitGame()
     {
         Clear();
         Environment.Exit(0);
@@ -165,7 +204,7 @@ internal class Game
                         SaveGame();
                         break;
                     case 2:
-                        Quit();
+                        QuitGame();
                         break;
                     default:
                         Clear();
