@@ -51,20 +51,27 @@ internal class Game
 
                 // Rensar konsol och skriver ut inledande story
                 Clear();
-                Print("Du vaknar upp i en dimmig skog och har ingen aning om hur du hamnade där, \n");
-                Print($"men du kommer åtminstone ihåg att du heter {Player.CurrentPlayer.Name}. \n\n");
-                Print("En mystisk röst hörs i vinden. Den uppmanar dig att följa stigen framåt...");
+                WriteLine("Spelberättelse\n");
+                Print("Du vaknar upp i en dimmig skog och har ingen aning om hur du hamnade där,\n");
+                Print($"men du kommer åtminstone ihåg att du heter {Player.CurrentPlayer.Name}.\n\n");
+                Print("En mystisk röst hörs i vinden och uppmanar dig att följa stigen framåt...");
                 ReadKey();
                 Clear();
-                Print("Efter att ha vandrat en stund genom den dimmiga skogen, når du en gammal \n");
-                Print("stenport. Porten öppnas långsamt när du närmar dig, och du stiger in i en \n");
-                Print("värld där skuggorna tycks leva sitt eget liv. \n\n");
-                Print("Din uppgift är att utforska denna mystiska värld, avslöja dess \n");
-                Print("hemligheter och övervinna de faror som lurar i skuggorna...");
+                WriteLine("Spelberättelse\n");
+                Print("Efter att ha vandrat en stund genom den dimmiga skogen, når du en gammal\n");
+                Print("stenport. Porten öppnas långsamt när du närmar dig, och du stiger in i en\n");
+                Print("värld där skuggorna tycks leva sitt eget liv...");
+                ReadKey();
+                Clear();
+                WriteLine("Spelberättelse\n");
+                Print("Din uppgift är att utforska denna mystiska värld, avslöja dess hemligheter\n");
+                Print("och övervinna de faror som lurar i skuggorna. Du kommer att stöta på olika\n");
+                Print("varelser och samla erfarenhetspoäng (XP) för att öka i level...");
                 ReadKey();
 
-                // Anropar metod
-                PlayGame();
+                // Anropar metod och skickar med parameter
+                bool newGame = true;
+                PlayGame(newGame);
             }
         }
     }
@@ -92,7 +99,7 @@ internal class Game
                 WriteLine("----------------------------\n");
                 for (int i = 0; i < Players.Count; i++)
                 {
-                    WriteLine($"    {i + 1}. {Players[i].Name} (level {Players[i].Level})");
+                    WriteLine($"{i + 1}. {Players[i].Name} (level {Players[i].Level})");
                 }
                 Write($"\nVälj ett alternativ (1-{Players.Count}): ");
 
@@ -112,52 +119,67 @@ internal class Game
                     isChoiceValid = true;
                 }
             }
-
-            // Rensar konsol och skriver ut hälsning...
-            Clear();
-            Print($"Välkommen tillbaka, {Player.CurrentPlayer.Name}...");
-            ReadKey();
-
-            // Anropar metod
-            PlayGame();
+            // Anropar metod och skickar med parameter
+            bool newGame = false;
+            PlayGame(newGame);
         }
     }
 
-    // Statisk metod för att spela olika nivåer av spelet
-    public static void PlayGame()
+    // Statisk metod för att spela den level spelaren är på
+    public static void PlayGame(bool newGame)
     {
-        // Rensar konsol och lagrar aktuell level i en variabel
-        Clear();
-        int currentLevel = Player.CurrentPlayer.Level;
-
-        // Kör kodblock utifrån spelarens level
-        switch (currentLevel)
+        // Skapar en loop för spelet
+        while (true)
         {
-            case 1:
-                // Skapar en ny instans av klassen "LevelOne" och skickar med namn som parameter
-                LevelOne levelOne = new("Level 1 - Skogens hemligheter");
+            // Lagrar aktuell level i en variabel
+            int currentLevel = Player.CurrentPlayer.Level;
 
-                // Skriver ut namn och beskrivning för level
-                Write($"{levelOne.Name}\n\n");
-                levelOne.LevelDescript();
-                ReadKey();
-                break;
-            case 2:
-                Write("Level 2...");
-                ReadKey();
-                break;
-            case 3:
-                Write("Level 3...");
-                ReadKey();
-                break;
-            case 4:
-                Write("Level 4...");
-                ReadKey();
-                break;
-            case 5:
-                Write("Level 5...");
-                ReadKey();
-                break;
+            // Kör kodblock utifrån spelarens level
+            switch (currentLevel)
+            {
+                case 1:
+                    // Skapar en ny instans av klassen "LevelOne" och skickar med namn som parameter
+                    LevelOne levelOne = new("Level 1 - Skogens hemligheter");
+
+                    // Om ett nytt spel har startats
+                    if (newGame)
+                    {
+                        // Rensar konsol och skriver ut namn och beskrivning för level
+                        Clear();
+                        levelOne.Descript();
+                        ReadKey();
+
+                        // Uppdaterar spelarens WeaponValue och Potions
+                        Player.CurrentPlayer.WeaponStrength += 3;
+                        Player.CurrentPlayer.Potions += 5;
+                    }
+                    // Skriver ut spelarstatus
+                    Player.CurrentPlayer.PlayerStatus();
+
+                    // Anropar klass-metod
+                    levelOne.TaskMenu();
+                    break;
+                case 2:
+                    Clear();
+                    Write("Level 2...");
+                    ReadKey();
+                    break;
+                case 3:
+                    Clear();
+                    Write("Level 3...");
+                    ReadKey();
+                    break;
+                case 4:
+                    Clear();
+                    Write("Level 4...");
+                    ReadKey();
+                    break;
+                case 5:
+                    Clear();
+                    Write("Level 5...");
+                    ReadKey();
+                    break;
+            }
         }
     }
 
@@ -186,49 +208,6 @@ internal class Game
     {
         Clear();
         Environment.Exit(0);
-    }
-
-    // Statisk metod för att skriva ut meny
-    public static void GameMenu()
-    {
-        // Skapar en loop för menyn
-        while (true)
-        {
-            // Rensar konsol och skriver ut meny
-            Clear();
-            WriteLine("Vad vill du göra?\n");
-            WriteLine("1. Spara");
-            WriteLine("2. Avsluta\n");
-
-            // Efterfrågar inmatning
-            Write("Välj ett alternativ (1-2): ");
-
-            // Om inmatning är en siffra körs switch-satsen
-            if (int.TryParse(ReadLine(), out int choice))
-            {
-                switch (choice)
-                {
-                    case 1:
-                        SaveGame();
-                        break;
-                    case 2:
-                        QuitGame();
-                        break;
-                    default:
-                        Clear();
-                        Write("\nOgiltigt alternativ! Tryck på valfri tangent...");
-                        ReadKey();
-                        break;
-                }
-            }
-            // Om inmatning inte är en siffra skrivs felmeddelande ut
-            else
-            {
-                Clear();
-                Write("\nOgiltigt alternativ! Tryck på valfri tangent...");
-                ReadKey();
-            }
-        }
     }
 
     /* 

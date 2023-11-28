@@ -40,12 +40,12 @@ while (true)
 {
     // Rensar konsol, skriver ut startmeny och efterfrågar inmatning
     Clear();
-    WriteLine("----------------------------");
-    WriteLine("      S P E L M E N Y       ");
-    WriteLine("----------------------------\n");
-    WriteLine("    1. Starta nytt spel");
-    WriteLine("    2. Ladda sparat spel");
-    WriteLine("    3. Avsluta\n");
+    WriteLine("-----------------------------");
+    WriteLine("       S P E L M E N Y       ");
+    WriteLine("-----------------------------\n");
+    WriteLine("1. Starta nytt spel");
+    WriteLine("2. Ladda sparat spel");
+    WriteLine("3. Avsluta\n");
     Write("Välj ett alternativ (1-3): ");
 
     // Om inmatning är en siffra körs switch-satsen
