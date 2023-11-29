@@ -1,13 +1,9 @@
-/*
-Importerar klass för att slippa upprepa "Console" och namespace för 
-att hantera konvertering mellan JSON och objekt.
-*/
-using static System.Console;
+// Importerar namespace för att hantera konvertering mellan JSON och objekt
 using System.Text.Json;
 
 internal class Game
 {
-    // Skapar en privat statisk lista av Player-objekt
+    // Skapar en statisk lista av Player-objekt
     private static List<Player> Players = new();
 
     // Konstruktor som körs när en instans av klassen "Game" skapas
@@ -24,16 +20,16 @@ internal class Game
     // Statisk metod för att starta ett nytt spel
     public static void NewGame()
     {
-        // Så länge isInputValid är false körs while-loopen
-        bool isInputValid = false;
-        while (!isInputValid)
+        // Så länge validInput är false körs while-loopen
+        bool validInput = false;
+        while (!validInput)
         {
-            // Rensar konsol, efterfrågar användarens namn och sparar värde i variabel
+            // Rensar konsol, efterfrågar namn och sparar värde i variabel
             Clear();
             Write("Ge din spelkaraktär ett namn: ");
             string? name = ReadLine();
 
-            // Om namn är null, tomt eller blanksteg skrivs felmeddelande ut och en ny iteration av loopan startas
+            // Om namn är null, tomt eller blanksteg skrivs felmeddelande ut och en ny iteration av loopan startar
             if (string.IsNullOrWhiteSpace(name))
             {
                 Clear();
@@ -46,30 +42,34 @@ internal class Game
                 Player.CurrentPlayer.Id = Players.Count + 1;
                 Player.CurrentPlayer.Name = name;
 
-                // isInputValid sätts till true för att stoppa loopen
-                isInputValid = true;
+                // validInput sätts till true för att stoppa loopen
+                validInput = true;
 
-                // Rensar konsol och skriver ut inledande story
+                // Rensar konsol och skriver ut inledande story med metod för "skriv ut långsamt"-effekt
                 Clear();
-                WriteLine("Spelberättelse\n");
                 Print("Du vaknar upp i en dimmig skog och har ingen aning om hur du hamnade där,\n");
                 Print($"men du kommer åtminstone ihåg att du heter {Player.CurrentPlayer.Name}.\n\n");
-                Print("En mystisk röst hörs i vinden och uppmanar dig att följa stigen framåt...");
+                Print("En svag röst hörs i vinden och uppmanar dig att följa stigen framåt...");
                 ReadKey();
                 Clear();
-                WriteLine("Spelberättelse\n");
                 Print("Efter att ha vandrat en stund genom den dimmiga skogen, når du en gammal\n");
                 Print("stenport. Porten öppnas långsamt när du närmar dig, och du stiger in i en\n");
                 Print("värld där skuggorna tycks leva sitt eget liv...");
                 ReadKey();
                 Clear();
-                WriteLine("Spelberättelse\n");
+                Print("Vid stenporten möter du den mystiska figuren Eldrion, väktaren av skogen.\n");
+                Print("Han berättar att skogen har förändrats den senaste tiden och att han inte\n");
+                Print("vet hur han ska kunna bli av med de mystiska skuggorna.\n\n");
+                Print("Eldrion ber dig om hjälp att lösa mysteriet. Han ger dig ett rostigt svärd\n");
+                Print("och en flaska läkande trolldryck som skydd på vägen...");
+                ReadKey();
+                Clear();
                 Print("Din uppgift är att utforska denna mystiska värld, avslöja dess hemligheter\n");
                 Print("och övervinna de faror som lurar i skuggorna. Du kommer att stöta på olika\n");
                 Print("varelser och samla erfarenhetspoäng (XP) för att öka i level...");
                 ReadKey();
 
-                // Anropar metod och skickar med parameter
+                // Skapar variabel, anropar metod och skickar med parameter
                 bool newGame = true;
                 PlayGame(newGame);
             }
@@ -79,18 +79,18 @@ internal class Game
     // Statisk metod för att ladda ett sparat spel
     public static void LoadGame()
     {
-        // Rensar konsol och om antalet sparade spelare är noll skrivs meddelande ut
+        // Rensar konsol och om antalet sparade spel är noll skrivs meddelande ut
         Clear();
         if (Players.Count == 0)
         {
             Write("Det finns inga sparade spel. Tryck på valfri tangent...");
             ReadKey();
         }
-        // Om antalet spelare inte är noll körs while-loopen så länge isChoiceValid är false
+        // Om antalet spelare inte är noll körs while-loopen så länge validChoice är false
         else
         {
-            bool isChoiceValid = false;
-            while (!isChoiceValid)
+            bool validChoice = false;
+            while (!validChoice)
             {
                 // Rensar konsol, skriver ut sparade spel och efterfrågar inmatning
                 Clear();
@@ -103,32 +103,31 @@ internal class Game
                 }
                 Write($"\nVälj ett alternativ (1-{Players.Count}): ");
 
-                // Om inmatning inte är korrekt skrivs felmeddelande ut
+                // Om inmatning inte är ett korrekt alternativ skrivs felmeddelande ut
                 if (!int.TryParse(ReadLine(), out int choice) || choice < 1 || choice > Players.Count)
                 {
-                    Clear();
-                    Write("Ogiltigt alternativ! Tryck på valfri tangent...");
-                    ReadKey();
+                    WriteOptionErrorMessage();
                 }
-                // Om inmatning är korrekt uppdateras CurrentPlayer med vald spelare
+                // Om inmatning är ett korrekt alternativ uppdateras CurrentPlayer med vald spelare
                 else
                 {
                     Player.CurrentPlayer = Players[choice - 1];
 
-                    // isChoiceValid sätts till true för att stoppa loopen
-                    isChoiceValid = true;
+                    // validChoice sätts till true för att stoppa loopen
+                    validChoice = true;
+
+                    // Skapar variabel, anropar metod och skickar med parameter
+                    bool newGame = false;
+                    PlayGame(newGame);
                 }
             }
-            // Anropar metod och skickar med parameter
-            bool newGame = false;
-            PlayGame(newGame);
         }
     }
 
     // Statisk metod för att spela den level spelaren är på
     public static void PlayGame(bool newGame)
     {
-        // Skapar en loop för spelet
+        // Skapar en loop som håller igång aktuellt spel
         while (true)
         {
             // Lagrar aktuell level i en variabel
@@ -144,14 +143,9 @@ internal class Game
                     // Om ett nytt spel har startats
                     if (newGame)
                     {
-                        // Rensar konsol och skriver ut namn och beskrivning för level
-                        Clear();
-                        levelOne.Descript();
-                        ReadKey();
-
                         // Uppdaterar spelarens WeaponValue och Potions
-                        Player.CurrentPlayer.WeaponStrength += 3;
-                        Player.CurrentPlayer.Potions += 5;
+                        Player.CurrentPlayer.WeaponStrength += 1;
+                        Player.CurrentPlayer.Potions += 1;
                     }
                     // Skriver ut spelarstatus
                     Player.CurrentPlayer.PlayerStatus();
@@ -186,13 +180,13 @@ internal class Game
     // Statisk metod för att spara ett spel
     public static void SaveGame()
     {
-        // Om CurrentPlayer redan existerar i listan med spelare ersätts den befintliga instansen
-        var existingPlayer = Players.Find(p => p.Id == Player.CurrentPlayer.Id);
+        // Om aktuell spelare redan existerar i listan med spelare, ersätts den befintliga instansen
+        var existingPlayer = Players.Find(player => player.Id == Player.CurrentPlayer.Id);
         if (existingPlayer != null)
         {
             Players[Players.IndexOf(existingPlayer)] = Player.CurrentPlayer;
         }
-        // Om CurrentPlayer inte existerar adderas den nya insatsen till listan med spelare
+        // Om aktuell spelare inte existerar adderas insatsen till listan med spelare
         else
         {
             Players.Add(Player.CurrentPlayer);
@@ -201,6 +195,11 @@ internal class Game
         // Serialiserar listan med spelare till en JSON-sträng och sparar den till en JSON-fil
         string json = JsonSerializer.Serialize(Players);
         File.WriteAllText("savedgames.json", json);
+
+        // Rensar konsol och skriver ut meddelande
+        Clear();
+        Write("Spelet har sparats...");
+        ReadKey();
     }
 
     // Statisk metod för att avsluta programmet
@@ -210,13 +209,18 @@ internal class Game
         Environment.Exit(0);
     }
 
-    /* 
-    Statisk metod för att skapa en "skriv ut långsamt"-effekt på 
-    konsolen genom att skriva ut varje tecken i textsträngen med 
-    en fördröjning på 20 millisekunder mellan varje tecken.
-    */
+    // Statisk metod för att skriva ut felmeddelande
+    public static void WriteOptionErrorMessage()
+    {
+        Clear();
+        Write("Ogiltigt alternativ! Gör ett nytt försök...");
+        ReadKey();
+    }
+
+    // Statisk metod för att skapa en "skriv ut långsamt"-effekt på konsolen
     public static void Print(string text)
     {
+        // Skriver ut varje varje bokstav i medskickad textsträng med en fördröjning på 20 millisekunder
         foreach (char character in text)
         {
             Write(character);

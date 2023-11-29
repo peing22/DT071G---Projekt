@@ -1,6 +1,6 @@
 internal abstract class Level 
 { 
-    // Egenskap som kan returnera och tilldelas ett värde
+    // Egenskap av typen string som kan returnera och tilldelas ett värde
     public string? Name { get; set; }
 
     // Abstrakta metoder som måste implementeras i underordnade klasser

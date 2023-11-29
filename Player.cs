@@ -1,12 +1,9 @@
-// Importerar klass för att slippa upprepa "Console"
-using static System.Console;
-
 internal class Player
 {
     // Skapar en statisk medlemsvariabel och en instans av klassen Player som kan användas av övriga klasser 
     public static Player CurrentPlayer = new();
 
-    // Egenskaper som kan returnera och tilldelas värden
+    // Egenskaper av typerna integer och string som kan returnera och tilldelas värden
     public int Id { get; set; }
     public string? Name { get; set; }
     public int Level { get; set; } = 1;
@@ -35,13 +32,17 @@ internal class Player
     // Metod för att skriva ut en XP-indikator
     public void ProgressBar()
     {
-        decimal value = (decimal)Xp / 100;
-        int size = 10;
-        int dif = (int)(value * size);
+        // Skapar variabel som lagrar att indikatorns storlek ska vara tio tecken
+        int barSize = 10;
+
+        // Skapar variabel som lagrar hur många tecken som ska fyllas i indikatorn baserat på spelarens XP
+        int progressValue = Xp / 10;
+
+        // Skriver ut indikatorn
         Write("[");
-        for (int i = 0; i < size; i++)
+        for (int i = 0; i < barSize; i++)
         {
-            if (i < dif)
+            if (i < progressValue)
             {
                 Write("+");
             }
@@ -53,9 +54,10 @@ internal class Player
         WriteLine("]");
     }
 
-    // Metod för att dricka en läkande trolldryck
+    // Metod för att uppdatera värden när spelaren väljer att dricka en trolldryck
     public void DrinkPotion()
     {
+        // Om Potions är större än noll skrivs meddelande ut, Health ökar och Potions minskar
         if (Potions > 0)
         {
             Clear();
@@ -64,6 +66,7 @@ internal class Player
             Health += 10;
             Potions -= 1;
         }
+        // Om  Potions är mindre än noll skrivs meddelande ut
         else
         {
             Clear();
@@ -75,6 +78,7 @@ internal class Player
     // Metod för att ta reda på om spelaren kan nå nästa level
     public bool CanLevelUp()
     {
+        // Om Xp är större än eller lika med 100 returneras true, annars false
         if (Xp >= 100) { return true; }
         else { return false; }
     }
@@ -82,11 +86,13 @@ internal class Player
     // Metod för att öka spelarens level
     public void LevelUp()
     {
+        // Så länge metoden returnerar true sätts Xp till noll och Level ökar med 1
         while (CanLevelUp())
         {
             Xp = 0;
             Level++;
         }
+        // Rensar konsol, ändrar förgrundsfärg i konsol, skriver ut meddelande och återställer förgrundsfärg
         Clear();
         ForegroundColor = ConsoleColor.Green;
         Write($"Grattis! Du har nått Level {Level}...");

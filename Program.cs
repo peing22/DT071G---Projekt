@@ -1,5 +1,5 @@
-﻿// Importerar klass för att slippa upprepa "Console"
-using static System.Console;
+﻿// Importerar klass globalt för att slippa upprepa "Console"
+global using static System.Console;
 
 // Rensar konsol och lagrar en ASCII-designad textsträng i en variabel
 Clear();
@@ -29,16 +29,16 @@ WriteLine(title);
 ResetColor();
 
 // Ber användaren trycka på valfri tangent för att komma vidare
-Write("                       Tryck på valfri tangent för att starta spelet...");
+Write("                       Tryck på valfri tangent för att gå vidare...");
 ReadKey();
 
-// Skapar en ny instans av klassen "Game" för att konstruktorn ska köras
+// Skapar en ny instans av klassen "Game" för att dennes konstruktor ska köras
 Game game = new();
 
-// Skapar en loop för startmenyn
+// Skapar en loop som håller igång spelmenyn
 while (true)
 {
-    // Rensar konsol, skriver ut startmeny och efterfrågar inmatning
+    // Rensar konsol, skriver ut spelmeny och efterfrågar inmatning
     Clear();
     WriteLine("-----------------------------");
     WriteLine("       S P E L M E N Y       ");
@@ -63,17 +63,14 @@ while (true)
                 Game.QuitGame();
                 break;
             default:
-                Clear();
-                Write("Ogiltigt alternativ! Tryck på valfri tangent...");
-                ReadKey();
+                Game.WriteOptionErrorMessage();
                 break;
         }
     }
     // Om inmatning inte är en siffra skrivs felmeddelande ut
     else
     {
-        Clear();
-        Write("Ogiltigt alternativ! Tryck på valfri tangent...");
-        ReadKey();
+        Game.WriteOptionErrorMessage();
     }
 }
+
