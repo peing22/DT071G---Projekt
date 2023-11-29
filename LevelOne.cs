@@ -65,7 +65,7 @@ internal class LevelOne : Level
                 switch (choice)
                 {
                     case 1:
-                        // Genererar ett slumpmässigt tal från 10 till 20 och ökar spelarens XP
+                        // Genererar ett slumpmässigt tal och ökar spelarens XP
                         int gainedXp = new Random().Next(10, 21);
                         Player.CurrentPlayer.Xp += gainedXp;
 
@@ -100,10 +100,138 @@ internal class LevelOne : Level
         }
     }
 
+    // Statisk metod för att besöka trollkarlens stuga
     private static void VisitWizardsCottage()
     {
-        // Implementera logiken för att besöka trollkarlens stuga här
-        // Svara rätt på en gåta för möjlighet att få en läkande trolldryck, räkna ut ett tal så slipar trollkarlen svärdet
+        // Så länge validChoice är false körs while-loopen
+        bool validChoice = false;
+        while (!validChoice)
+        {
+            // Rensar konsol och skriver ut information
+            Clear();
+            WriteLine("Du beslutar dig för att besöka trollkarlens stuga. När du närmar");
+            WriteLine("dig öppnar trollkarlen dörren och hälsar dig välkommen. Han tittar");
+            WriteLine("på dig med nyfikna ögon och undrar hur han kan stå till tjänst.\n");
+            WriteLine("Vad vill du fråga trollkarlen?\n");
+            WriteLine("1. Har du en läkande trolldryck som jag kan få?");
+            WriteLine("2. Kan du hjälpa mig att slipa mitt svärd?");
+
+            // Efterfrågar inmatning
+            Write("\nVälj ett alternativ (1-2): ");
+
+            // Om inmatningen är en siffra körs switch-satsen
+            if (int.TryParse(ReadLine(), out int choice))
+            {
+                switch (choice)
+                {
+                    case 1:
+                        // Rensar konsol och skriver ut meddelande
+                        Clear();
+                        WriteLine("Trollkarlen skrattar och säger att det är klart att han har en läkande");
+                        WriteLine("trolldryck, men att inget är gratis här i världen. Om du kan svara");
+                        Write("rätt på en gåta lovar han att ge dig en läkande trolldryck...");
+                        ReadKey();
+
+                        // Hämtar en slumpmässig gåta från Riddle-klassen
+                        Riddle randomRiddle = Riddle.GetRandomRiddle();
+
+                        // Rensar konsol, skriver ut gåta och efterfrågar svar
+                        Clear();
+                        WriteLine(randomRiddle.Text);
+                        Write("\nSkriv ditt svar: ");
+
+                        // Lagrar svaret som gemener i en variabel
+                        string? answer = ReadLine()?.ToLower();
+
+                        // Om svaret är korrekt uppdateras Potions med 1
+                        if (randomRiddle.Answer == answer || randomRiddle.AnswerOpt == answer)
+                        {
+                            Player.CurrentPlayer.Potions += 1;
+                            Clear();
+                            WriteLine("Trollkarlen ler och säger att du har svarat rätt på gåtan! Du får en");
+                            Write("läkande trolldryck precis som han har utlovat...");
+                            ReadKey();
+                        }
+                        // Om svaret inte är korrekt skrivs meddelande ut
+                        else
+                        {
+                            Clear();
+                            WriteLine("Trollkarlen ser lite besviken ut och säger att det tyvärr inte var rätt");
+                            Write("svar, men att du är välkommen åter om du vill göra ett nytt försök...");
+                            ReadKey();
+                        }
+
+                        // validChoice sätts till true för att stoppa while-loopen
+                        validChoice = true;
+                        break;
+                    case 2:
+                        // Rensar konsol och skriver ut meddelande
+                        Clear();
+                        WriteLine("Trollkarlen svarar att han kan hjälpa dig om du lyckas räkna ut");
+                        Write("svaret på ett matematiskt tal...");
+                        ReadKey();
+
+                        // Genererar två slumpmässiga
+                        int number1 = new Random().Next(1, 11);
+                        int number2 = new Random().Next(1, 11);
+
+                        // Så länge validOpt är false körs while-loopen
+                        bool validOpt = false;
+                        while (!validOpt)
+                        {
+
+                            // Rensar konsol, skriver ut tal och efterfrågar svar
+                            Clear();
+                            WriteLine($"Vad är {number1}*{number2}?");
+                            Write("\nSkriv ditt svar: ");
+
+                            // Om inmatningen är en siffra
+                            if (int.TryParse(ReadLine(), out int result))
+                            {
+                                // Beräknar det korrekta svaret
+                                int correctAnswer = number1 * number2;
+
+                                // Om svaret är korrekt uppdateras WeaponStrenght med 1
+                                if (result == correctAnswer)
+                                {
+                                    Player.CurrentPlayer.WeaponStrength += 1;
+                                    Clear();
+                                    WriteLine($"Trollkarlen säger att du är smart och att svaret {result} är rätt! Han");
+                                    Write("hjälper dig att slipa ditt svärd, vilket ökar dess styrka...");
+                                    ReadKey();
+                                }
+                                // Om svaret inte är korrekt skrivs meddelande ut
+                                else
+                                {
+                                    Clear();
+                                    WriteLine($"Trollkarlen ser lite besviken ut och säger att rätt svar är {correctAnswer}.");
+                                    Write("Du svarade fel, men är välkommen åter för ett nytt försök...");
+                                    ReadKey();
+                                }
+
+                                // validOpt sätts till true för att stoppa while-loopen
+                                validOpt = true;
+                            }
+                            // Om inmatningen inte är en siffra skrivs felmeddelande ut
+                            else
+                            {
+                                Game.WriteOptionErrorMessage();
+                            }
+                        }
+                        // validChoice sätts till true för att stoppa while-loopen
+                        validChoice = true;
+                        break;
+                    default:
+                        Game.WriteOptionErrorMessage();
+                        break;
+                }
+            }
+            // Om inmatningen inte är en siffra skrivs felmeddelande ut
+            else
+            {
+                Game.WriteOptionErrorMessage();
+            }
+        }
     }
 
     private static void ChallengeSneakyShadow()
