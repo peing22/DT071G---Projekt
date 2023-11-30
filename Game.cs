@@ -36,16 +36,11 @@ internal class Game
                 Write("Ogiltigt namn! Tryck på valfri tangent...");
                 ReadKey();
             }
-            // Om namn är korrekt angivet sätts värden för spelarens egenskaper
+            // Om namn är korrekt angivet skapas ett id och värden sätts för spelarens egenskaper
             else
             {
-                Player.CurrentPlayer.Id = Players.Count + 1;
-                Player.CurrentPlayer.Name = name;
-                Player.CurrentPlayer.Level = 1;
-                Player.CurrentPlayer.Xp = 0;
-                Player.CurrentPlayer.Health = 10;
-                Player.CurrentPlayer.WeaponStrength = 1;
-                Player.CurrentPlayer.Potions = 1;
+                int id = Players.Count + 1;
+                Player.CurrentPlayer.SetPlayerValues(id, name, 1, 0, 10, 1, 1);
 
                 // validInput sätts till true för att stoppa loopen
                 validInput = true;

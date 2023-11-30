@@ -12,6 +12,18 @@ internal class Player
     public int WeaponStrength { get; set; }
     public int Potions { get; set; }
 
+    // Metod (ej konstruktor) för att kunna sätta värden på den befintliga CurrentPlayer-instansens egenskaper
+    public void SetPlayerValues(int id, string name, int level, int xp, int health, int weaponStrength, int potions)
+    {
+        Id = id;
+        Name = name;
+        Level = level;
+        Xp = xp;
+        Health = health;
+        WeaponStrength = weaponStrength;
+        Potions = potions;
+    }
+
     // Metod för att visa spelarens status
     public void PlayerStatus()
     {
@@ -30,7 +42,7 @@ internal class Player
     }
 
     // Metod för att skriva ut en XP-indikator
-    public void ProgressBar()
+    public void XpIndicator()
     {
         // Skapar variabel som lagrar att indikatorns storlek ska vara tio tecken
         int barSize = 10;
@@ -42,14 +54,8 @@ internal class Player
         Write("[");
         for (int i = 0; i < barSize; i++)
         {
-            if (i < progressValue)
-            {
-                Write("+");
-            }
-            else
-            {
-                Write(" ");
-            }
+            if (i < progressValue) { Write("+"); }
+            else { Write(" "); }
         }
         WriteLine("]");
     }
@@ -57,22 +63,22 @@ internal class Player
     // Metod för att uppdatera värden när spelaren väljer att dricka en trolldryck
     public void DrinkPotion()
     {
+        // Rensar konsol
+        Clear();
+
         // Om Potions är större än noll skrivs meddelande ut, Health ökar och Potions minskar
         if (Potions > 0)
         {
-            Clear();
-            Write("Trolldrycken gör susen och ökar din hälsa med 10...");
-            ReadKey();
+            Write("Du dricker en trolldryck som gör susen och som ökar din hälsa med 10...");
             Health += 10;
             Potions -= 1;
         }
         // Om Potions är mindre än noll skrivs meddelande ut
         else
         {
-            Clear();
             Write("Du har inga läkande trolldrycker kvar...");
-            ReadKey();
         }
+        ReadKey();
     }
 
     // Metod som returnerar true om spelarens hälsa är större än noll

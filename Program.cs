@@ -48,7 +48,7 @@ while (true)
     WriteLine("3. Avsluta\n");
     Write("Välj ett alternativ (1-3): ");
 
-    // Om inmatning är en siffra körs switch-satsen
+    // Om inmatning är en siffra körs switch-satsen där olika metoder anropas
     if (int.TryParse(ReadLine(), out int choice))
     {
         switch (choice)
@@ -74,4 +74,3 @@ while (true)
         Game.WriteOptionErrorMessage();
     }
 }
-

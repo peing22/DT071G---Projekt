@@ -1,5 +1,8 @@
 internal class Battle
 {
+    // Skapar en fältvariabel
+    private static readonly Random random = new();
+
     // Statisk metod för starta en strid
     public static void StartBattle(Player player, Creature creature)
     {
@@ -7,7 +10,7 @@ internal class Battle
         bool thePlayerRemain = true;
         while (player.IsAlive() && creature.IsAlive() && thePlayerRemain)
         {
-            // Rensar konsol och skriver ut information om varelse och spelare
+            // Rensar konsol och skriver ut information om spelare och varelse
             Clear();
             WriteLine("---------------------------------");
             WriteLine("            S T R I D            ");
@@ -32,77 +35,19 @@ internal class Battle
             // Efterfrågar inmatning
             Write("\nVälj ett alternativ (1-3): ");
 
-            // Om inmatningen är en siffra körs switch-satsen
+            // Om inmatningen är en siffra körs switch-satsen där metoder anropas
             if (int.TryParse(ReadLine(), out int choice))
             {
                 switch (choice)
                 {
                     case 1:
-                        // Rensar konsol, genererar ett slumpmässigt nummer och kör switch-satsen
-                        Clear();
-                        int attack = new Random().Next(1, 4);
-                        switch (attack)
-                        {
-                            case 1:
-                                // Skriver ut meddelande och minskar varelsens hälsa
-                                WriteLine("Du går till attack med ditt svärd och träffar med full kraft. Den");
-                                Write($"{creature.Name!.ToLower()} har ingen chans och förlorar {player.WeaponStrength} i hälsa...");
-                                creature.Health -= player.WeaponStrength;
-                                break;
-                            case 2:
-                                // Skriver ut meddelande
-                                Write($"Du går till attack med ditt svärd, men den {creature.Name!.ToLower()} försvarar sig...");
-                                break;
-                            case 3:
-                                // Skriver ut meddelande och minskar spelarens hälsa
-                                WriteLine($"Du går till attack med ditt svärd, men den {creature.Name!.ToLower()} lyckas");
-                                Write($"överlista dig och gör en motattack. Du förlorar {creature.WeaponStrength} i hälsa...");
-                                player.Health -= creature.WeaponStrength;
-                                break;
-                        }
-                        ReadKey();
+                        Attack(player, creature);
                         break;
                     case 2:
-                        // Rensar konsol, genererar ett slumpmässigt nummer och kör switch-satsen
-                        Clear();
-                        int defend = new Random().Next(1, 3);
-                        switch (defend)
-                        {
-                            case 1:
-                                // Skriver ut meddelande
-                                WriteLine($"Den {creature.Name!.ToLower()} gör ett försök att attackera dig,");
-                                Write("men du lyckas försvara dig...");
-                                break;
-                            case 2:
-                                // Skriver ut meddelande och minskar spelarens hälsa
-                                WriteLine($"Den {creature.Name!.ToLower()} attackerar dig med all sin kraft och");
-                                Write($"du lyckas inte försvara dig. Du förlorar {creature.WeaponStrength} i hälsa...");
-                                player.Health -= creature.WeaponStrength;
-                                break;
-                        }
-                        ReadKey();
+                        Defend(player, creature);
                         break;
                     case 3:
-                        // Rensar konsol, genererar ett slumpmässigt nummer och kör switch-satsen
-                        Clear();
-                        int run = new Random().Next(1, 3);
-                        switch (run)
-                        {
-                            case 1:
-                                // Skriver ut meddelande
-                                Write("Du springer för ditt liv och lyckas på något otroligt sätt komma undan...");
-                                break;
-                            case 2:
-                                // Skriver ut meddelande och minskar spelarens hälsa
-                                WriteLine($"Du springer för ditt liv, men under flykten lyckas den {creature.Name!.ToLower()}");
-                                Write($"attackera dig och du förlorar {creature.WeaponStrength} i hälsa...");
-                                player.Health -= creature.WeaponStrength;
-                                break;
-                        }
-                        ReadKey();
-
-                        // Sätter thePlayerRemain till false för att stoppa while-loopen
-                        thePlayerRemain = false;
+                        Escape(player, creature, ref thePlayerRemain);
                         break;
                     default:
                         Game.WriteOptionErrorMessage();
@@ -115,7 +60,89 @@ internal class Battle
                 Game.WriteOptionErrorMessage();
             }
         }
+        // Anropar metod för att hantera utfallet av striden
+        BattleOutcome(player, creature);
+    }
 
+    // Statisk metod för att gå till attack
+    private static void Attack(Player player, Creature creature)
+    {
+        // Rensar konsol, genererar ett slumpmässigt nummer och kör switch-satsen
+        Clear();
+        int attack = new Random().Next(1, 4);
+        switch (attack)
+        {
+            case 1:
+                // Skriver ut meddelande och minskar varelsens hälsa
+                WriteLine("Du går till attack med ditt svärd och träffar med full kraft. Den");
+                Write($"{creature.Name!.ToLower()} har ingen chans och förlorar {player.WeaponStrength} i hälsa...");
+                creature.Health -= player.WeaponStrength;
+                break;
+            case 2:
+                // Skriver ut meddelande
+                Write($"Du går till attack med ditt svärd, men den {creature.Name!.ToLower()} försvarar sig...");
+                break;
+            case 3:
+                // Skriver ut meddelande och minskar spelarens hälsa
+                WriteLine($"Du går till attack med ditt svärd, men den {creature.Name!.ToLower()} lyckas");
+                Write($"överlista dig och gör en motattack. Du förlorar {creature.WeaponStrength} i hälsa...");
+                player.Health -= creature.WeaponStrength;
+                break;
+        }
+        ReadKey();
+    }
+
+    // Statisk metod för att försvara sig
+    private static void Defend(Player player, Creature creature)
+    {
+        // Rensar konsol, genererar ett slumpmässigt nummer och kör switch-satsen
+        Clear();
+        int defend = new Random().Next(1, 3);
+        switch (defend)
+        {
+            case 1:
+                // Skriver ut meddelande
+                WriteLine($"Den {creature.Name!.ToLower()} gör ett försök att attackera dig,");
+                Write("men du lyckas försvara dig...");
+                break;
+            case 2:
+                // Skriver ut meddelande och minskar spelarens hälsa
+                WriteLine($"Den {creature.Name!.ToLower()} attackerar dig med all sin kraft och");
+                Write($"du lyckas inte försvara dig. Du förlorar {creature.WeaponStrength} i hälsa...");
+                player.Health -= creature.WeaponStrength;
+                break;
+        }
+        ReadKey();
+    }
+
+    // Statisk metod för att springa iväg
+    private static void Escape(Player player, Creature creature, ref bool thePlayerRemain)
+    {
+        // Rensar konsol, genererar ett slumpmässigt nummer och kör switch-satsen
+        Clear();
+        int run = new Random().Next(1, 3);
+        switch (run)
+        {
+            case 1:
+                // Skriver ut meddelande
+                Write("Du springer för ditt liv och lyckas på något otroligt sätt komma undan...");
+                break;
+            case 2:
+                // Skriver ut meddelande och minskar spelarens hälsa
+                WriteLine($"Du springer för ditt liv, men under flykten lyckas den {creature.Name!.ToLower()}");
+                Write($"attackera dig och du förlorar {creature.WeaponStrength} i hälsa...");
+                player.Health -= creature.WeaponStrength;
+                break;
+        }
+        ReadKey();
+
+        // Sätter thePlayerRemain till false för att stoppa while-loopen
+        thePlayerRemain = false;
+    }
+
+    // Statisk metod för att hantera utfallet av striden
+    private static void BattleOutcome(Player player, Creature creature)
+    {
         // Om varelsen inte lever ökas spelarens XP, konsolen rensas och meddelande skrivs ut
         if (!creature.IsAlive())
         {

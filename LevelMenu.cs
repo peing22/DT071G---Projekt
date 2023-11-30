@@ -7,7 +7,7 @@ internal class LevelMenu
         Clear();
         WriteLine("-----------------------------------------------------------------");
         Write($" {name}         XP-indikator ");
-        Player.CurrentPlayer.ProgressBar();
+        Player.CurrentPlayer.XpIndicator();
         WriteLine("-----------------------------------------------------------------\n");
 
         // Anropar metod för att visa beskrivning och ställer en fråga till spelaren
