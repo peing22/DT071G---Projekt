@@ -23,7 +23,7 @@ internal class LevelMenu
 
         // Skriver ut extra menyalternativ som inte ingår i lexikonet av menyobjekt
         WriteLine($"{menuItems.Count + 1}. Dricka en läkande trolldryck");
-        WriteLine($"{menuItems.Count + 2}. Se aktuell status");
+        WriteLine($"{menuItems.Count + 2}. Se din aktuella status");
         WriteLine($"{menuItems.Count + 3}. Spara spelet");
         WriteLine($"{menuItems.Count + 4}. Avsluta\n");
 

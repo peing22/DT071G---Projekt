@@ -5,17 +5,22 @@ internal class Riddle
     public string? Answer { get; }
     public string? AnswerOpt { get; }
 
+    // Konstruktor som körs när en instans av klassen "Riddle" skapas
     public Riddle(string text, string answer, string answerOpt)
     {
+        // Sätter värde för klassens egenskaper
         Text = text;
         Answer = answer;
         AnswerOpt = answerOpt;
     }
 
+    // Statisk metod som returnerar en slumpmässigt vald gåta från en lista av gåtor
     public static Riddle GetRandomRiddle()
     {
+        // Skapar och instansierar en lista av gåtor
         List<Riddle> riddles = new()
         {
+            // Skapar gåtor med frågor, svar och alternativa svar
             new Riddle("Vad är det som är smittsamt, men som ingen är rädd för?", "skrattet", "ett skratt"),
             new Riddle("Vad blir blötare och blötare ju mer du torkar?", "handduken", "en handduk"),
             new Riddle("Vad går upp och ner utan att röra sig?", "trappan", "en trappa"),
@@ -36,6 +41,7 @@ internal class Riddle
             new Riddle("På vilken sida av ett får är det mest ull?", "utsidan", "på utsidan")
         };
 
+        // Returnerar en slumpmässig gåta från listan
         int randomIndex = new Random().Next(riddles.Count);
         return riddles[randomIndex];
     }

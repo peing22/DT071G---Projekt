@@ -1,7 +1,7 @@
-internal class LevelOne : Level
+internal class LevelTwo : Level
 {
     // Konstruktor som körs när en instans av klassen "LevelOne" skapas
-    public LevelOne(string name)
+    public LevelTwo(string name)
     {
         // Sätter värde på den ärvda Name-egenskapen
         base.Name = name;
@@ -44,94 +44,24 @@ internal class LevelOne : Level
     // Statisk metod för att utforska det viskande trädet
     private static void ExploreWhisperingTree()
     {
-        // Rensar konsol och skriver ut meddelande
-        Clear();
-        WriteLine("Du närmar dig det viskande trädet och hör att det på något märkligt");
-        Write("sätt uttalar ord som du kan förstå, med ledtrådar om skuggorna...");
-        ReadKey();
 
-        // Så länge validChoice är false körs while-loopen
-        bool validChoice = false;
-        while (!validChoice)
-        {
-            // Rensar konsol och skriver ut alternativ
-            Clear();
-            WriteLine("Vill du stanna och lyssna till det viskande trädet?\n");
-            WriteLine("1. Ja");
-            WriteLine("2. Nej");
-
-            // Efterfrågar inmatning
-            Write("\nVälj ett alternativ (1-2): ");
-
-            // Om inmatningen är en siffra körs switch-satsen
-            if (int.TryParse(ReadLine(), out int choice))
-            {
-                switch (choice)
-                {
-                    case 1:
-                        // Genererar ett slumpmässigt tal och ökar spelarens XP
-                        int gainedXp = new Random().Next(10, 21);
-                        Player.CurrentPlayer.Xp += gainedXp;
-
-                        // Rensar konsol och skriver ut meddelande
-                        Clear();
-                        WriteLine("Du lyssnar uppmärksamt och får ledtrådar om hur du ska kunna lösa");
-                        Write($"skuggornas mysterium. Dina erfarenhetspoäng (XP) ökar med {gainedXp}...");
-                        ReadKey();
-
-                        // validChoice sätts till true för att stoppa while-loopen
-                        validChoice = true;
-                        break;
-                    case 2:
-                        // Rensar konsol och skriver ut meddelande
-                        Clear();
-                        Write("Du väljer att gå därifrån...");
-                        ReadKey();
-
-                        // validChoice sätts till true för att stoppa while-loopen
-                        validChoice = true;
-                        break;
-                    default:
-                        Game.WriteOptionErrorMessage();
-                        break;
-                }
-            }
-            // Om inmatningen inte är en siffra skrivs felmeddelande ut
-            else
-            {
-                Game.WriteOptionErrorMessage();
-            }
-        }
     }
 
     // Statisk metod för att besöka trollkarlens stuga
     private static void VisitWizardsCottage()
     {
-        // Rensar konsol och skriver ut meddelande
-        Clear();
-        WriteLine("Du beslutar dig för att besöka trollkarlens stuga. När du närmar");
-        WriteLine("dig öppnar trollkarlen dörren och hälsar dig välkommen. Han tittar");
-        Write("på dig med nyfikna ögon och undrar hur han kan stå till tjänst...");
-        ReadKey();
-        Clear();
-        WriteLine("Du frågar om trollkarlen har någon läkande trolldryck som han kan");
-        Write("tänka sig att ge till dig...");
-        ReadKey();
-        Clear();
-        WriteLine("Trollkarlen skrattar och säger att han har många olika trolldrycker");
-        WriteLine("i sin stuga. Han lovar att ge dig en läkande trolldryck om du kan");
-        Write("svara rätt på en av hans gåtor...");
-        ReadKey();
-
         // Så länge validChoice är false körs while-loopen
         bool validChoice = false;
         while (!validChoice)
         {
-            // Rensar konsol och skriver ut alternativ
+            // Rensar konsol och skriver ut information
             Clear();
-            WriteLine("Vill du svara på en gåta?\n");
-            WriteLine("1. Ja");
-            WriteLine("2. Nej");
+            WriteLine("Du beslutar dig för att besöka trollkarlens stuga. När du närmar");
+            WriteLine("dig öppnar trollkarlen dörren och hälsar dig välkommen. Han tittar");
+            WriteLine("på dig med nyfikna ögon och undrar hur han kan stå till tjänst.\n");
+            WriteLine("Vad vill du fråga trollkarlen?\n");
+            WriteLine("1. Har du en läkande trolldryck som jag kan få?");
+            WriteLine("2. Kan du hjälpa mig att slipa mitt svärd?");
 
             // Efterfrågar inmatning
             Write("\nVälj ett alternativ (1-2): ");
@@ -142,24 +72,31 @@ internal class LevelOne : Level
                 switch (choice)
                 {
                     case 1:
+                        // Rensar konsol och skriver ut meddelande
+                        Clear();
+                        WriteLine("Trollkarlen skrattar och säger att det är klart att han har en läkande");
+                        WriteLine("trolldryck, men att inget är gratis här i världen. Om du kan svara");
+                        Write("rätt på en gåta lovar han att ge dig en läkande trolldryck...");
+                        ReadKey();
+
                         // Hämtar en slumpmässig gåta från Riddle-klassen
                         Riddle randomRiddle = Riddle.GetRandomRiddle();
 
                         // Rensar konsol, skriver ut gåta och efterfrågar svar
                         Clear();
-                        WriteLine($"Gåtan lyder: {randomRiddle.Text}");
+                        WriteLine(randomRiddle.Text);
                         Write("\nSkriv ditt svar: ");
 
                         // Lagrar svaret som gemener i en variabel
                         string? answer = ReadLine()?.ToLower();
 
-                        // Om svaret är korrekt uppdateras Potions med 1 och meddelande skrivs ut
+                        // Om svaret är korrekt uppdateras Potions med 1
                         if (randomRiddle.Answer == answer || randomRiddle.AnswerOpt == answer)
                         {
                             Player.CurrentPlayer.Potions += 1;
                             Clear();
-                            WriteLine("Trollkarlen ler och säger att du har svarat rätt på gåtan!");
-                            Write("Han ger dig en läkande trolldryck precis som utlovat...");
+                            WriteLine("Trollkarlen ler och säger att du har svarat rätt på gåtan! Du får en");
+                            Write("läkande trolldryck precis som han har utlovat...");
                             ReadKey();
                         }
                         // Om svaret inte är korrekt skrivs meddelande ut
@@ -177,9 +114,57 @@ internal class LevelOne : Level
                     case 2:
                         // Rensar konsol och skriver ut meddelande
                         Clear();
-                        Write("Du tackar nej och går därifrån...");
+                        WriteLine("Trollkarlen svarar att han kan hjälpa dig om du lyckas räkna ut");
+                        Write("svaret på ett matematiskt tal...");
                         ReadKey();
 
+                        // Genererar två slumpmässiga
+                        int number1 = new Random().Next(1, 11);
+                        int number2 = new Random().Next(1, 11);
+
+                        // Så länge validOpt är false körs while-loopen
+                        bool validOpt = false;
+                        while (!validOpt)
+                        {
+
+                            // Rensar konsol, skriver ut tal och efterfrågar svar
+                            Clear();
+                            WriteLine($"Vad är {number1}*{number2}?");
+                            Write("\nSkriv ditt svar: ");
+
+                            // Om inmatningen är en siffra
+                            if (int.TryParse(ReadLine(), out int result))
+                            {
+                                // Beräknar det korrekta svaret
+                                int correctAnswer = number1 * number2;
+
+                                // Om svaret är korrekt uppdateras WeaponStrenght med 1
+                                if (result == correctAnswer)
+                                {
+                                    Player.CurrentPlayer.WeaponStrength += 1;
+                                    Clear();
+                                    WriteLine($"Trollkarlen säger att du är smart och att svaret {result} är rätt! Han");
+                                    Write("hjälper dig att slipa ditt svärd, vilket ökar dess styrka...");
+                                    ReadKey();
+                                }
+                                // Om svaret inte är korrekt skrivs meddelande ut
+                                else
+                                {
+                                    Clear();
+                                    WriteLine($"Trollkarlen ser lite besviken ut och säger att rätt svar är {correctAnswer}.");
+                                    Write("Du svarade fel, men är välkommen åter för ett nytt försök...");
+                                    ReadKey();
+                                }
+
+                                // validOpt sätts till true för att stoppa while-loopen
+                                validOpt = true;
+                            }
+                            // Om inmatningen inte är en siffra skrivs felmeddelande ut
+                            else
+                            {
+                                Game.WriteOptionErrorMessage();
+                            }
+                        }
                         // validChoice sätts till true för att stoppa while-loopen
                         validChoice = true;
                         break;
@@ -196,11 +181,8 @@ internal class LevelOne : Level
         }
     }
 
-    // Statisk metod för att utmana den smygande skuggan
     private static void ChallengeSneakyShadow()
     {
-        // Implementera logiken för att utmana den smygande skuggan här
-        // En fight med varelsen som kan skada hälsan och öka XP vid seger
-        // Skapa en egen klass för varelser med namn (smygande skuggan), hälsa (3), vapen (laserblick), vapenstyrka (1)...
+
     }
 }
