@@ -60,7 +60,8 @@ while (true)
                 Game.LoadGame();
                 break;
             case 3:
-                Game.QuitGame();
+                Clear();
+                Environment.Exit(0);
                 break;
             default:
                 Game.WriteOptionErrorMessage();

@@ -86,13 +86,13 @@ internal class Game
             Write("Det finns inga sparade spel. Tryck på valfri tangent...");
             ReadKey();
         }
-        // Om antalet spelare inte är noll körs while-loopen så länge validChoice är false
+        // Om antalet spelare inte är noll körs while-loopen så länge validChoiceOrCancel är false
         else
         {
-            bool validChoice = false;
-            while (!validChoice)
+            bool validChoiceOrCancel = false;
+            while (!validChoiceOrCancel)
             {
-                // Rensar konsol, skriver ut sparade spel och efterfrågar inmatning
+                // Rensar konsol, skriver ut alternativ och efterfrågar inmatning
                 Clear();
                 WriteLine("----------------------------");
                 WriteLine("   S P A R A D E  S P E L   ");
@@ -101,24 +101,34 @@ internal class Game
                 {
                     WriteLine($"{i + 1}. {Players[i].Name} (level {Players[i].Level})");
                 }
-                Write($"\nVälj ett alternativ (1-{Players.Count}): ");
+                WriteLine($"{Players.Count + 1}. Avbryt\n");
+                Write($"Välj ett alternativ (1-{Players.Count + 1}): ");
 
                 // Om inmatning inte är ett korrekt alternativ skrivs felmeddelande ut
-                if (!int.TryParse(ReadLine(), out int choice) || choice < 1 || choice > Players.Count)
+                if (!int.TryParse(ReadLine(), out int choice) || choice < 1 || choice > Players.Count + 1)
                 {
                     WriteOptionErrorMessage();
                 }
-                // Om inmatning är ett korrekt alternativ uppdateras CurrentPlayer med vald spelare
+                // Om inmatning är ett korrekt alternativ och om valet är ett sparat spel
                 else
                 {
-                    Player.CurrentPlayer = Players[choice - 1];
+                    if (choice <= Players.Count)
+                    {
+                        // Uppdaterar CurrentPlayer med vald spelare
+                        Player.CurrentPlayer = Players[choice - 1];
 
-                    // validChoice sätts till true för att stoppa loopen
-                    validChoice = true;
+                        // validChoiceOrCancel sätts till true för att stoppa loopen
+                        validChoiceOrCancel = true;
 
-                    // Skapar variabel, anropar metod och skickar med parameter
-                    bool newGame = false;
-                    PlayGame(newGame);
+                        // Skapar variabel, anropar metod och skickar med parameter
+                        bool newGame = false;
+                        PlayGame(newGame);
+                    }
+                    // Om valet är avbryt sätts validChoiceOrCancel till true för att stoppa loopen
+                    else
+                    {
+                        validChoiceOrCancel = true;
+                    }
                 }
             }
         }
