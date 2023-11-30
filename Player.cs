@@ -6,11 +6,11 @@ internal class Player
     // Egenskaper av typerna integer och string som kan returnera och tilldelas värden
     public int Id { get; set; }
     public string? Name { get; set; }
-    public int Level { get; set; } = 1;
-    public int Xp { get; set; } = 0;
-    public int Health { get; set; } = 10;
-    public int WeaponStrength { get; set; } = 0;
-    public int Potions { get; set; } = 0;
+    public int Level { get; set; }
+    public int Xp { get; set; }
+    public int Health { get; set; }
+    public int WeaponStrength { get; set; }
+    public int Potions { get; set; }
 
     // Metod för att visa spelarens status
     public void PlayerStatus()

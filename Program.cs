@@ -32,12 +32,12 @@ ResetColor();
 Write("                       Tryck på valfri tangent för att gå vidare...");
 ReadKey();
 
-// Skapar en ny instans av klassen "Game" för att dennes konstruktor ska köras
-Game game = new();
-
-// Skapar en loop som håller igång spelmenyn
+// Skapar en loop som håller igång spelmenyn tills programmet avslutas
 while (true)
 {
+    // Skapar en ny instans av klassen "Game" för att dennes konstruktor ska köras
+    Game game = new();
+
     // Rensar konsol, skriver ut spelmeny och efterfrågar inmatning
     Clear();
     WriteLine("-----------------------------");

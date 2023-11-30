@@ -36,11 +36,16 @@ internal class Game
                 Write("Ogiltigt namn! Tryck på valfri tangent...");
                 ReadKey();
             }
-            // Om namn är korrekt angivet sätts värden för spelarens id och namn
+            // Om namn är korrekt angivet sätts värden för spelarens egenskaper
             else
             {
                 Player.CurrentPlayer.Id = Players.Count + 1;
                 Player.CurrentPlayer.Name = name;
+                Player.CurrentPlayer.Level = 1;
+                Player.CurrentPlayer.Xp = 0;
+                Player.CurrentPlayer.Health = 10;
+                Player.CurrentPlayer.WeaponStrength = 1;
+                Player.CurrentPlayer.Potions = 1;
 
                 // validInput sätts till true för att stoppa loopen
                 validInput = true;
@@ -69,9 +74,8 @@ internal class Game
                 Print("varelser och samla erfarenhetspoäng (XP) för att öka i level...");
                 ReadKey();
 
-                // Skapar variabel, anropar metod och skickar med parameter
-                bool newGame = true;
-                PlayGame(newGame);
+                // Anropar metod
+                PlayGame();
             }
         }
     }
@@ -83,7 +87,7 @@ internal class Game
         Clear();
         if (Players.Count == 0)
         {
-            Write("Det finns inga sparade spel. Tryck på valfri tangent...");
+            Write("Det finns inga sparade spel...");
             ReadKey();
         }
         // Om antalet spelare inte är noll körs while-loopen så länge validChoiceOrCancel är false
@@ -120,11 +124,10 @@ internal class Game
                         // validChoiceOrCancel sätts till true för att stoppa loopen
                         validChoiceOrCancel = true;
 
-                        // Skapar variabel, anropar metod och skickar med parameter
-                        bool newGame = false;
-                        PlayGame(newGame);
+                        // Anropar metod
+                        PlayGame();
                     }
-                    // Om valet är avbryt sätts validChoiceOrCancel till true för att stoppa loopen
+                    // Om valet är att avbryta sätts validChoiceOrCancel till true för att stoppa loopen
                     else
                     {
                         validChoiceOrCancel = true;
@@ -135,10 +138,11 @@ internal class Game
     }
 
     // Statisk metod för att spela den level spelaren är på
-    public static void PlayGame(bool newGame)
+    public static void PlayGame()
     {
-        // Skapar en loop som håller igång aktuellt spel
-        while (true)
+        // Skapar en variabel och en loop som håller igång aktuellt spel så länge activeGame är true
+        bool activeGame = true;
+        while (activeGame)
         {
             // Lagrar aktuell level i en variabel
             int currentLevel = Player.CurrentPlayer.Level;
@@ -150,13 +154,6 @@ internal class Game
                     // Skapar en ny instans av klassen "LevelOne" och skickar med namn som parameter
                     LevelOne levelOne = new("Level 1 - Skogens hemligheter");
 
-                    // Om ett nytt spel har startats
-                    if (newGame)
-                    {
-                        // Uppdaterar spelarens WeaponValue och Potions
-                        Player.CurrentPlayer.WeaponStrength += 1;
-                        Player.CurrentPlayer.Potions += 1;
-                    }
                     // Skriver ut spelarstatus
                     Player.CurrentPlayer.PlayerStatus();
 
@@ -178,10 +175,8 @@ internal class Game
                     Write("Level 4...");
                     ReadKey();
                     break;
-                case 5:
-                    Clear();
-                    Write("Level 5...");
-                    ReadKey();
+                case 100:
+                    activeGame = false;
                     break;
             }
         }
@@ -212,11 +207,14 @@ internal class Game
         ReadKey();
     }
 
-    // Statisk metod för att avsluta programmet
+    // Statisk metod för att avsluta aktuellt spel
     public static void QuitGame()
     {
+        // Rensar konsol och sätter level till 100 för att stoppa loopen som håller igång aktuellt spel
         Clear();
-        Environment.Exit(0);
+        Write("Spelet har avslutats...");
+        ReadKey();
+        Player.CurrentPlayer.Level = 100;
     }
 
     // Statisk metod för att skriva ut felmeddelande
