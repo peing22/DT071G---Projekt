@@ -210,11 +210,11 @@ internal class Game
     // Statisk metod för att avsluta aktuellt spel
     public static void QuitGame()
     {
-        // Rensar konsol och sätter level till 100 för att stoppa loopen som håller igång aktuellt spel
+        // Sätter level till 100 för att stoppa loopen som håller igång aktuellt spel
+        Player.CurrentPlayer.Level = 100;
         Clear();
         Write("Spelet har avslutats...");
         ReadKey();
-        Player.CurrentPlayer.Level = 100;
     }
 
     // Statisk metod för att skriva ut felmeddelande

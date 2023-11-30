@@ -66,13 +66,19 @@ internal class Player
             Health += 10;
             Potions -= 1;
         }
-        // Om  Potions är mindre än noll skrivs meddelande ut
+        // Om Potions är mindre än noll skrivs meddelande ut
         else
         {
             Clear();
             Write("Du har inga läkande trolldrycker kvar...");
             ReadKey();
         }
+    }
+
+    // Metod som returnerar true om spelarens hälsa är större än noll
+    public bool IsAlive()
+    {
+        return Health > 0;
     }
 
     // Metod för att ta reda på om spelaren kan nå nästa level
@@ -94,7 +100,7 @@ internal class Player
         }
         // Rensar konsol, ändrar förgrundsfärg i konsol, skriver ut meddelande och återställer förgrundsfärg
         Clear();
-        ForegroundColor = ConsoleColor.Green;
+        ForegroundColor = ConsoleColor.Cyan;
         Write($"Grattis! Du har nått Level {Level}...");
         ResetColor();
         ReadKey();

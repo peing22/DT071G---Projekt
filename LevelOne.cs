@@ -199,8 +199,69 @@ internal class LevelOne : Level
     // Statisk metod för att utmana den smygande skuggan
     private static void ChallengeSneakyShadow()
     {
-        // Implementera logiken för att utmana den smygande skuggan här
-        // En fight med varelsen som kan skada hälsan och öka XP vid seger
-        // Skapa en egen klass för varelser med namn (smygande skuggan), hälsa (3), vapen (laserblick), vapenstyrka (1)...
+        // Rensar konsol och skriver ut meddelande
+        Clear();
+        WriteLine("Under din vistelse i skogen har du lagt märke till att det smyger");
+        Write("omkring en mystisk skugga bland träden...");
+        ReadKey();
+        Clear();
+        WriteLine($"När du närmar dig den smygande skuggan märker du att den blir hotfull,");
+        Write("som att den tänker gå till attack om du kommer för nära...");
+        ReadKey();
+
+        // Så länge validChoice är false körs while-loopen
+        bool validChoice = false;
+        while (!validChoice)
+        {
+            // Rensar konsol och skriver ut alternativ
+            Clear();
+            WriteLine($"Vill du utmana den smygande skuggan?\n");
+            WriteLine("1. Ja");
+            WriteLine("2. Nej");
+
+            // Efterfrågar inmatning
+            Write("\nVälj ett alternativ (1-2): ");
+
+            // Om inmatningen är en siffra körs switch-satsen
+            if (int.TryParse(ReadLine(), out int choice))
+            {
+                switch (choice)
+                {
+                    case 1:
+                        // Rensar konsol och skriver ut meddelande
+                        Clear();
+                        WriteLine("Du känner dig modig, drar fram ditt svärd och går med bestämda steg fram");
+                        Write("till din motståndare som väser hotfullt och gör sig redo för strid...");
+                        ReadKey();
+
+                        // Skapar en instans av klassen "Creature"
+                        Creature sneakyShadow = new("Smygande skuggan", 3, 1, 50);
+
+                        // Anropar metod för att starta strid
+                        Battle.StartBattle(Player.CurrentPlayer, sneakyShadow);
+
+                        // validChoice sätts till true för att stoppa while-loopen
+                        validChoice = true;
+                        break;
+                    case 2:
+                        // Rensar konsol och skriver ut meddelande
+                        Clear();
+                        Write($"Du känner dig inte redo för att utmana den smygande skuggan...");
+                        ReadKey();
+
+                        // validChoice sätts till true för att stoppa while-loopen
+                        validChoice = true;
+                        break;
+                    default:
+                        Game.WriteOptionErrorMessage();
+                        break;
+                }
+            }
+            // Om inmatningen inte är en siffra skrivs felmeddelande ut
+            else
+            {
+                Game.WriteOptionErrorMessage();
+            }
+        }
     }
 }
