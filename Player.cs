@@ -1,6 +1,6 @@
 internal class Player
 {
-    // Skapar en statisk medlemsvariabel och en instans av klassen Player som kan användas av övriga klasser 
+    // Skapar en statisk medlemsvariabel som lagrar en instans av klassen "Player" för att kunna användas av övriga klasser 
     public static Player CurrentPlayer = new();
 
     // Egenskaper av typerna integer och string som kan returnera och tilldelas värden
