@@ -1,13 +1,13 @@
 internal class LevelMenu
 {
     // Statisk metod för att visa levelmenyn
-    public static void DisplayMenu(string name, Action description, Dictionary<int, MenuItem> menuItems)
+    public static void DisplayMenu(string name, Player player, Action description, Dictionary<int, MenuItem> menuItems)
     {
         // Rensar konsol och skriver ut namn och XP-indikator
         Clear();
         WriteLine("-----------------------------------------------------------------");
         Write($" {name}");
-        int level = Player.CurrentPlayer.Level;
+        int level = player.Level;
         switch (level)
         {
             case 1:
@@ -18,7 +18,7 @@ internal class LevelMenu
                 break;
         }
         Write($"XP-indikator ");
-        Player.CurrentPlayer.XpIndicator();
+        player.XpIndicator();
         WriteLine("-----------------------------------------------------------------\n");
 
         // Anropar metod för att visa beskrivning och ställer en fråga till spelaren
@@ -50,19 +50,19 @@ internal class LevelMenu
             }
             else if (choice == menuItems.Count + 1)
             {
-                Player.CurrentPlayer.DrinkPotion();
+                player.DrinkPotion();
             }
             else if (choice == menuItems.Count + 2)
             {
-                Player.CurrentPlayer.PlayerStatus();
+                player.PlayerStatus();
             }
             else if (choice == menuItems.Count + 3)
             {
-                Game.SaveGame();
+                Game.SaveGame(player);
             }
             else if (choice == menuItems.Count + 4)
             {
-                Game.QuitGame();
+                Game.QuitGame(player);
             }
             // Om spelarens val inte matchar något av alternativen ovan skrivs felmeddelande ut
             else
@@ -77,10 +77,10 @@ internal class LevelMenu
         }
 
         // Om spelaren kan nå nästa level
-        if (Player.CurrentPlayer.CanLevelUp())
+        if (player.CanLevelUp())
         {
             // Anropar metod för att öka spelarens level
-            Player.CurrentPlayer.LevelUp();
+            player.LevelUp();
         }
     }
 }

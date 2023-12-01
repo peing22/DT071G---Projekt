@@ -1,8 +1,5 @@
 internal class Player
 {
-    // Skapar en statisk medlemsvariabel som lagrar en instans av klassen "Player" för att kunna användas av övriga klasser 
-    public static Player CurrentPlayer = new();
-
     // Egenskaper av typerna integer och string som kan returnera och tilldelas värden
     public int Id { get; set; }
     public string? Name { get; set; }
@@ -12,8 +9,8 @@ internal class Player
     public int WeaponStrength { get; set; }
     public int Potions { get; set; }
 
-    // Metod (ej konstruktor) för att kunna sätta värden på den befintliga CurrentPlayer-instansens egenskaper
-    public void SetPlayerValues(int id, string name, int level, int xp, int health, int weaponStrength, int potions)
+    // Konstruktor som sätter värden på egenskaperna när en ny instans av klassen skapas
+    public Player(int id, string name, int level, int xp, int health, int weaponStrength, int potions)
     {
         Id = id;
         Name = name;

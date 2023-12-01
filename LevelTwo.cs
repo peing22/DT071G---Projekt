@@ -17,10 +17,10 @@ internal class LevelTwo : Level
     }
 
     // Metod för att implementera den ärvda abstrakta metoden och skriva ut en meny med olika val
-    public override void TaskMenu()
+    public override void TaskMenu(Player player)
     {
         // Skapar en loop som körs så länge spelarens level är 2
-        while (Player.CurrentPlayer.Level == 2)
+        while (player.Level == 2)
         {
             // Skapar ett lexikon av menyobjekt som lagras i en variabel
             var menuItems = new Dictionary<int, MenuItem>
@@ -30,40 +30,40 @@ internal class LevelTwo : Level
                 menyalternativ. Varje instans av MenuItem har en beskrivning och en
                 referens till en metod.
                 */
-                { 1, new MenuItem("Besöka den forntida smedjan", VisitAncientForge) },
-                { 2, new MenuItem("Granska ruinernas inskriptioner", ExamineTheInscriptions) },
-                { 3, new MenuItem("Utforska det gamla apotekets ruiner", ExploreTheOldPharmacy) },
-                { 4, new MenuItem("Utmana den spöklika skuggan", ChallengeGhostlyShadow) }
+                { 1, new MenuItem("Besöka den forntida smedjan", () => VisitAncientForge(player)) },
+                { 2, new MenuItem("Granska ruinernas inskriptioner", () => ExamineTheInscriptions(player)) },
+                { 3, new MenuItem("Utforska det gamla apotekets ruiner", () => ExploreTheOldPharmacy(player)) },
+                { 4, new MenuItem("Utmana den spöklika skuggan", () => ChallengeGhostlyShadow(player)) }
             };
 
             /*
-            Anropar en klassmetod som tar tre argument: Level-namn, en referens till 
-            metoden Descript och variabeln som lagrar lexikonet av menyobjekt.
+            Anropar klassmetod och skickar med argumenten Level-namn, spelaren, en referens
+            till metoden Descript och variabeln som lagrar lexikonet av menyobjekt.
             */
-            LevelMenu.DisplayMenu(Name!, Descript, menuItems);
+            LevelMenu.DisplayMenu(Name!, player, Descript, menuItems);
         }
     }
 
     // Statisk metod för att besöka den forntida smedjan
-    private static void VisitAncientForge()
+    private static void VisitAncientForge(Player player)
     {
 
     }
 
     // Statisk metod för att granska ruinernas inskriptioner
-    private static void ExamineTheInscriptions()
+    private static void ExamineTheInscriptions(Player player)
     {
         
     }
 
     // Statisk metod för att utforska det gamla apotekets ruiner
-    private static void ExploreTheOldPharmacy()
+    private static void ExploreTheOldPharmacy(Player player)
     {
         
     }
 
     // Statisk metod för att utmana den spöklika skuggan
-    private static void ChallengeGhostlyShadow()
+    private static void ChallengeGhostlyShadow(Player player)
     {
 
     }

@@ -5,5 +5,5 @@ internal abstract class Level
 
     // Abstrakta metoder som måste implementeras i underordnade klasser
     public abstract void Descript();
-    public abstract void TaskMenu();
+    public abstract void TaskMenu(Player player);
 }

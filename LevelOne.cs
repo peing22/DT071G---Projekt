@@ -15,10 +15,10 @@ internal class LevelOne : Level
     }
 
     // Metod för att implementera den ärvda abstrakta metoden och skriva ut en meny med olika val
-    public override void TaskMenu()
+    public override void TaskMenu(Player player)
     {
         // Skapar en loop som körs så länge spelarens level är 1
-        while (Player.CurrentPlayer.Level == 1)
+        while (player.Level == 1)
         {
             // Skapar ett lexikon av menyobjekt som lagras i en variabel
             var menuItems = new Dictionary<int, MenuItem>
@@ -28,21 +28,21 @@ internal class LevelOne : Level
                 menyalternativ. Varje instans av MenuItem har en beskrivning och en
                 referens till en metod.
                 */
-                { 1, new MenuItem("Utforska det viskande trädet", ExploreWhisperingTree) },
-                { 2, new MenuItem("Besöka trollkarlens stuga", VisitWizardsCottage) },
-                { 3, new MenuItem("Utmana den smygande skuggan", ChallengeSneakyShadow) }
+                { 1, new MenuItem("Utforska det viskande trädet", () => ExploreWhisperingTree(player)) },
+                { 2, new MenuItem("Besöka trollkarlens stuga", () => VisitWizardsCottage(player)) },
+                { 3, new MenuItem("Utmana den smygande skuggan", () => ChallengeSneakyShadow(player)) }
             };
 
             /*
-            Anropar en klassmetod som tar tre argument: Level-namn, en referens till 
-            metoden Descript och variabeln som lagrar lexikonet av menyobjekt.
+            Anropar klassmetod och skickar med argumenten Level-namn, spelaren, en referens
+            till metoden Descript och variabeln som lagrar lexikonet av menyobjekt.
             */
-            LevelMenu.DisplayMenu(Name!, Descript, menuItems);
+            LevelMenu.DisplayMenu(Name!, player, Descript, menuItems);
         }
     }
 
     // Statisk metod för att utforska det viskande trädet
-    private static void ExploreWhisperingTree()
+    private static void ExploreWhisperingTree(Player player)
     {
         // Rensar konsol och skriver ut meddelande
         Clear();
@@ -71,7 +71,7 @@ internal class LevelOne : Level
                     case 1:
                         // Genererar ett slumpmässigt tal och ökar spelarens XP
                         int gainedXp = new Random().Next(20, 31);
-                        Player.CurrentPlayer.Xp += gainedXp;
+                        player.Xp += gainedXp;
 
                         // Rensar konsol och skriver ut meddelande
                         Clear();
@@ -105,7 +105,7 @@ internal class LevelOne : Level
     }
 
     // Statisk metod för att besöka trollkarlens stuga
-    private static void VisitWizardsCottage()
+    private static void VisitWizardsCottage(Player player)
     {
         // Rensar konsol och skriver ut meddelande
         Clear();
@@ -156,7 +156,7 @@ internal class LevelOne : Level
                         // Om svaret är korrekt uppdateras Potions med 1 och meddelande skrivs ut
                         if (randomRiddle.Answer == answer || randomRiddle.AnswerOpt == answer)
                         {
-                            Player.CurrentPlayer.Potions += 1;
+                            player.Potions += 1;
                             Clear();
                             WriteLine("Trollkarlen ler och säger att du har svarat rätt på gåtan!");
                             Write("Han ger dig en läkande trolldryck precis som utlovat...");
@@ -197,7 +197,7 @@ internal class LevelOne : Level
     }
 
     // Statisk metod för att utmana den smygande skuggan
-    private static void ChallengeSneakyShadow()
+    private static void ChallengeSneakyShadow(Player player)
     {
         // Rensar konsol och skriver ut meddelande
         Clear();
@@ -238,7 +238,7 @@ internal class LevelOne : Level
                         Creature sneakyShadow = new("Smygande skuggan", 5, 1, 70);
 
                         // Anropar metod för att starta strid
-                        Battle.StartBattle(Player.CurrentPlayer, sneakyShadow);
+                        Battle.StartBattle(player, sneakyShadow);
 
                         // validChoice sätts till true för att stoppa while-loopen
                         validChoice = true;

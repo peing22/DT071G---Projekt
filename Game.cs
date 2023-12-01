@@ -36,11 +36,11 @@ internal class Game
                 Write("Ogiltigt namn! Tryck på valfri tangent...");
                 ReadKey();
             }
-            // Om namn är korrekt angivet skapas ett id och värden sätts för spelarens egenskaper
+            // Om namn är korrekt angivet skapas ett id, en ny instans av klassen "Player" och värden sätts för spelarens egenskaper
             else
             {
                 int id = Players.Count + 1;
-                Player.CurrentPlayer.SetPlayerValues(id, name, 1, 0, 10, 1, 1);
+                Player newPlayer = new(id, name, 1, 0, 10, 1, 1);
 
                 // validInput sätts till true för att stoppa loopen
                 validInput = true;
@@ -48,7 +48,7 @@ internal class Game
                 // Rensar konsol och skriver ut inledande story med metod för "skriv ut långsamt"-effekt
                 Clear();
                 Print("Du vaknar upp i en dimmig skog och har ingen aning om hur du hamnade där,\n");
-                Print($"men du kommer åtminstone ihåg att du heter {Player.CurrentPlayer.Name}...");
+                Print($"men du kommer åtminstone ihåg att du heter {newPlayer.Name}...");
                 ReadKey();
                 Clear();
                 Print("En svag röst hörs i vinden och uppmanar dig att följa stigen framåt...");
@@ -73,8 +73,8 @@ internal class Game
                 Print("varelser och samla erfarenhetspoäng (XP) för att öka i level...");
                 ReadKey();
 
-                // Anropar metod
-                PlayGame();
+                // Anropar metod och skickar med spelaren
+                PlayGame(newPlayer);
             }
         }
     }
@@ -117,14 +117,17 @@ internal class Game
                 {
                     if (choice <= Players.Count)
                     {
-                        // Uppdaterar CurrentPlayer med vald spelare
-                        Player.CurrentPlayer = Players[choice - 1];
+                        // Lagrar det sparade spelets spelare i en variabel
+                        var player = Players[choice - 1];
+
+                        // Skapar en ny instans av klassen "Player" och sätter värden för spelarens egenskaper
+                        Player loadedPlayer = new(player.Id, player.Name!, player.Level, player.Xp, player.Health, player.WeaponStrength, player.Potions);
 
                         // validChoiceOrCancel sätts till true för att stoppa loopen
                         validChoiceOrCancel = true;
 
-                        // Anropar metod
-                        PlayGame();
+                        // Anropar metod och skickar med spelaren
+                        PlayGame(loadedPlayer);
                     }
                     // Om valet är att avbryta sätts validChoiceOrCancel till true för att stoppa loopen
                     else
@@ -137,37 +140,37 @@ internal class Game
     }
 
     // Statisk metod för att spela den level spelaren är på
-    public static void PlayGame()
+    public static void PlayGame(Player player)
     {
         // Skapar en variabel och en loop som håller igång aktuellt spel så länge activeGame är true
         bool activeGame = true;
         while (activeGame)
         {
-            // Lagrar aktuell level i en variabel
-            int currentLevel = Player.CurrentPlayer.Level;
+            // Lagrar spelarens level i en variabel
+            int level = player.Level;
 
             // Kör kodblock utifrån spelarens level
-            switch (currentLevel)
+            switch (level)
             {
                 case 1:
-                    // Skapar en ny instans av klassen "LevelOne" och skickar med namn som parameter
+                    // Skapar en ny instans av klassen "LevelOne" och skickar med namn
                     LevelOne levelOne = new("Level 1 - Skogens hemligheter");
 
                     // Skriver ut spelarstatus
-                    Player.CurrentPlayer.PlayerStatus();
+                    player.PlayerStatus();
 
                     // Anropar klass-metod
-                    levelOne.TaskMenu();
+                    levelOne.TaskMenu(player);
                     break;
                 case 2:
-                    // Skapar en ny instans av klassen "LevelTwo" och skickar med namn som parameter
+                    // Skapar en ny instans av klassen "LevelTwo" och skickar med namn
                     LevelTwo levelTwo = new("Level 2 - Förlorade ruiner");
 
                     // Skriver ut spelarstatus
-                    Player.CurrentPlayer.PlayerStatus();
+                    player.PlayerStatus();
 
                     // Anropar klass-metod
-                    levelTwo.TaskMenu();
+                    levelTwo.TaskMenu(player);
                     break;
                 case 3:
                     Clear();
@@ -187,18 +190,18 @@ internal class Game
     }
 
     // Statisk metod för att spara ett spel
-    public static void SaveGame()
+    public static void SaveGame(Player player)
     {
-        // Om aktuell spelare redan existerar i listan med spelare, ersätts den befintliga instansen
-        var existingPlayer = Players.Find(player => player.Id == Player.CurrentPlayer.Id);
+        // Om spelaren redan existerar i listan med spelare, ersätts den befintliga instansen
+        var existingPlayer = Players.Find(p => p.Id == player.Id);
         if (existingPlayer != null)
         {
-            Players[Players.IndexOf(existingPlayer)] = Player.CurrentPlayer;
+            Players[Players.IndexOf(existingPlayer)] = player;
         }
-        // Om aktuell spelare inte existerar adderas insatsen till listan med spelare
+        // Om spelaren inte existerar adderas insatsen till listan med spelare
         else
         {
-            Players.Add(Player.CurrentPlayer);
+            Players.Add(player);
         }
 
         // Serialiserar listan med spelare till en JSON-sträng och sparar den till en JSON-fil
@@ -212,10 +215,10 @@ internal class Game
     }
 
     // Statisk metod för att avsluta aktuellt spel
-    public static void QuitGame()
+    public static void QuitGame(Player player)
     {
         // Sätter level till 100 för att stoppa loopen som håller igång aktuellt spel
-        Player.CurrentPlayer.Level = 100;
+        player.Level = 100;
         Clear();
         Write("Spelet har avslutats...");
         ReadKey();

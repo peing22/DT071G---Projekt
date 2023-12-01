@@ -170,7 +170,7 @@ internal class Battle
             Clear();
             Write($"Den {creature.Name!.ToLower()} har besegrat dig och du är död...");
             ReadKey();
-            Game.QuitGame();
+            Game.QuitGame(player);
         }
     }
 }
