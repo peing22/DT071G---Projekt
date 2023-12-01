@@ -6,7 +6,18 @@ internal class LevelMenu
         // Rensar konsol och skriver ut namn och XP-indikator
         Clear();
         WriteLine("-----------------------------------------------------------------");
-        Write($" {name}         XP-indikator ");
+        Write($" {name}");
+        int level = Player.CurrentPlayer.Level;
+        switch (level)
+        {
+            case 1:
+                Write($"         ");
+                break;
+            case 2:
+                Write($"            ");
+                break;
+        }
+        Write($"XP-indikator ");
         Player.CurrentPlayer.XpIndicator();
         WriteLine("-----------------------------------------------------------------\n");
 

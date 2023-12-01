@@ -1,6 +1,6 @@
 internal class Battle
 {
-    // Skapar en fältvariabel
+    // Skapar en fältvariabel med en instans av kalssen "Random"
     private static readonly Random random = new();
 
     // Statisk metod för starta en strid
@@ -69,24 +69,30 @@ internal class Battle
     {
         // Rensar konsol, genererar ett slumpmässigt nummer och kör switch-satsen
         Clear();
-        int attack = new Random().Next(1, 4);
+        int attack = random.Next(1, 4);
         switch (attack)
         {
             case 1:
+                // Genererar ett slumpmässigt nummer
+                int playerMakeDamage = random.Next(1, player.WeaponStrength + 1);
+
                 // Skriver ut meddelande och minskar varelsens hälsa
-                WriteLine("Du går till attack med ditt svärd och träffar med full kraft. Den");
-                Write($"{creature.Name!.ToLower()} har ingen chans och förlorar {player.WeaponStrength} i hälsa...");
-                creature.Health -= player.WeaponStrength;
+                WriteLine("Du går till attack med ditt svärd och träffar med full kraft!");
+                Write($"Den {creature.Name!.ToLower()} förlorar {playerMakeDamage} i hälsa...");
+                creature.Health -= playerMakeDamage;
                 break;
             case 2:
                 // Skriver ut meddelande
                 Write($"Du går till attack med ditt svärd, men den {creature.Name!.ToLower()} försvarar sig...");
                 break;
             case 3:
+                // Genererar ett slumpmässigt nummer
+                int creatureMakeDamage = random.Next(1, creature.WeaponStrength + 1);
+
                 // Skriver ut meddelande och minskar spelarens hälsa
                 WriteLine($"Du går till attack med ditt svärd, men den {creature.Name!.ToLower()} lyckas");
-                Write($"överlista dig och gör en motattack. Du förlorar {creature.WeaponStrength} i hälsa...");
-                player.Health -= creature.WeaponStrength;
+                Write($"överlista dig och gör en motattack. Du förlorar {creatureMakeDamage} i hälsa...");
+                player.Health -= creatureMakeDamage;
                 break;
         }
         ReadKey();
@@ -97,7 +103,7 @@ internal class Battle
     {
         // Rensar konsol, genererar ett slumpmässigt nummer och kör switch-satsen
         Clear();
-        int defend = new Random().Next(1, 3);
+        int defend = random.Next(1, 3);
         switch (defend)
         {
             case 1:
@@ -106,10 +112,13 @@ internal class Battle
                 Write("men du lyckas försvara dig...");
                 break;
             case 2:
+                // Genererar ett slumpmässigt nummer
+                int creatureMakeDamage = random.Next(1, creature.WeaponStrength + 1);
+
                 // Skriver ut meddelande och minskar spelarens hälsa
                 WriteLine($"Den {creature.Name!.ToLower()} attackerar dig med all sin kraft och");
-                Write($"du lyckas inte försvara dig. Du förlorar {creature.WeaponStrength} i hälsa...");
-                player.Health -= creature.WeaponStrength;
+                Write($"du lyckas inte försvara dig. Du förlorar {creatureMakeDamage} i hälsa...");
+                player.Health -= creatureMakeDamage;
                 break;
         }
         ReadKey();
@@ -120,7 +129,7 @@ internal class Battle
     {
         // Rensar konsol, genererar ett slumpmässigt nummer och kör switch-satsen
         Clear();
-        int run = new Random().Next(1, 3);
+        int run = random.Next(1, 3);
         switch (run)
         {
             case 1:
@@ -128,10 +137,13 @@ internal class Battle
                 Write("Du springer för ditt liv och lyckas på något otroligt sätt komma undan...");
                 break;
             case 2:
+                // Genererar ett slumpmässigt nummer
+                int creatureMakeDamage = random.Next(1, creature.WeaponStrength + 1);
+
                 // Skriver ut meddelande och minskar spelarens hälsa
                 WriteLine($"Du springer för ditt liv, men under flykten lyckas den {creature.Name!.ToLower()}");
-                Write($"attackera dig och du förlorar {creature.WeaponStrength} i hälsa...");
-                player.Health -= creature.WeaponStrength;
+                Write($"attackera dig och du förlorar {creatureMakeDamage} i hälsa...");
+                player.Health -= creatureMakeDamage;
                 break;
         }
         ReadKey();

@@ -70,7 +70,7 @@ internal class LevelOne : Level
                 {
                     case 1:
                         // Genererar ett slumpmässigt tal och ökar spelarens XP
-                        int gainedXp = new Random().Next(10, 21);
+                        int gainedXp = new Random().Next(20, 31);
                         Player.CurrentPlayer.Xp += gainedXp;
 
                         // Rensar konsol och skriver ut meddelande
@@ -235,7 +235,7 @@ internal class LevelOne : Level
                         ReadKey();
 
                         // Skapar en instans av klassen "Creature"
-                        Creature sneakyShadow = new("Smygande skuggan", 3, 1, 50);
+                        Creature sneakyShadow = new("Smygande skuggan", 5, 1, 70);
 
                         // Anropar metod för att starta strid
                         Battle.StartBattle(Player.CurrentPlayer, sneakyShadow);

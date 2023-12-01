@@ -48,7 +48,9 @@ internal class Game
                 // Rensar konsol och skriver ut inledande story med metod för "skriv ut långsamt"-effekt
                 Clear();
                 Print("Du vaknar upp i en dimmig skog och har ingen aning om hur du hamnade där,\n");
-                Print($"men du kommer åtminstone ihåg att du heter {Player.CurrentPlayer.Name}.\n\n");
+                Print($"men du kommer åtminstone ihåg att du heter {Player.CurrentPlayer.Name}...");
+                ReadKey();
+                Clear();
                 Print("En svag röst hörs i vinden och uppmanar dig att följa stigen framåt...");
                 ReadKey();
                 Clear();
@@ -59,7 +61,9 @@ internal class Game
                 Clear();
                 Print("Vid stenporten möter du den mystiska figuren Eldrion, väktaren av skogen.\n");
                 Print("Han berättar att skogen har förändrats den senaste tiden och att han inte\n");
-                Print("vet hur han ska kunna bli av med de mystiska skuggorna.\n\n");
+                Print("vet hur han ska kunna bli av med de mystiska skuggorna...");
+                ReadKey();
+                Clear();
                 Print("Eldrion ber dig om hjälp att lösa mysteriet. Han ger dig ett rostigt svärd\n");
                 Print("och en flaska läkande trolldryck som skydd på vägen...");
                 ReadKey();
@@ -156,9 +160,14 @@ internal class Game
                     levelOne.TaskMenu();
                     break;
                 case 2:
-                    Clear();
-                    Write("Level 2...");
-                    ReadKey();
+                    // Skapar en ny instans av klassen "LevelTwo" och skickar med namn som parameter
+                    LevelTwo levelTwo = new("Level 2 - Förlorade ruiner");
+
+                    // Skriver ut spelarstatus
+                    Player.CurrentPlayer.PlayerStatus();
+
+                    // Anropar klass-metod
+                    levelTwo.TaskMenu();
                     break;
                 case 3:
                     Clear();
