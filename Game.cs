@@ -33,7 +33,7 @@ internal class Game
             if (string.IsNullOrWhiteSpace(name))
             {
                 Clear();
-                Write("Ogiltigt namn! Tryck på valfri tangent...");
+                Write("Ogiltigt namn! Gör ett nytt försök...");
                 ReadKey();
             }
             // Om namn är korrekt angivet skapas ett id, en ny instans av klassen "Player" och värden sätts för spelarens egenskaper
@@ -224,11 +224,19 @@ internal class Game
         ReadKey();
     }
 
-    // Statisk metod för att skriva ut felmeddelande
+    // Statisk metod för att skriva ut meddelande om felaktigt alternativ
     public static void WriteOptionErrorMessage()
     {
         Clear();
         Write("Ogiltigt alternativ! Gör ett nytt försök...");
+        ReadKey();
+    }
+
+    // Statisk metod för att skriva ut meddelande om felaktig input
+    public static void WriteInputErrorMessage()
+    {
+        Clear();
+        Write("Ogiltigt svar! Gör ett nytt försök...");
         ReadKey();
     }
 

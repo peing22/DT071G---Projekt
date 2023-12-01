@@ -34,7 +34,7 @@ internal class Player
         WriteLine($" Trolldrycker   {Potions}");
         WriteLine($"        Level   {Level}");
         WriteLine($"           XP   {Xp}");
-        Write("\n Tryck på valfri tangent...");
+        Write("\n  Tryck på valfri tangent...");
         ReadKey();
     }
 

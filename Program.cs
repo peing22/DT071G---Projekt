@@ -28,8 +28,11 @@ ForegroundColor = ConsoleColor.DarkGray;
 WriteLine(title);
 ResetColor();
 
+// Döljer cursor
+CursorVisible = false;
+
 // Ber användaren trycka på valfri tangent för att komma vidare
-Write("                       Tryck på valfri tangent för att gå vidare...");
+Write("                         Tryck på valfri tangent för att gå vidare...");
 ReadKey();
 
 // Skapar en loop som håller igång spelmenyn tills programmet avslutas

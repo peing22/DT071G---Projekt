@@ -145,32 +145,46 @@ internal class LevelOne : Level
                         // Hämtar en slumpmässig gåta från Riddle-klassen
                         Riddle randomRiddle = Riddle.GetRandomRiddle();
 
-                        // Rensar konsol, skriver ut gåta och efterfrågar svar
-                        Clear();
-                        WriteLine($"Gåtan lyder: {randomRiddle.Text}");
-                        Write("\nSkriv ditt svar: ");
-
-                        // Lagrar svaret som gemener i en variabel
-                        string? answer = ReadLine()?.ToLower();
-
-                        // Om svaret är korrekt uppdateras Potions med 1 och meddelande skrivs ut
-                        if (randomRiddle.Answer == answer || randomRiddle.AnswerOpt == answer)
+                        // Så länge validInput är false körs while-loopen
+                        bool validInput = false;
+                        while (!validInput)
                         {
-                            player.Potions += 1;
+                            // Rensar konsol, skriver ut gåta och efterfrågar svar
                             Clear();
-                            WriteLine("Trollkarlen ler och säger att du har svarat rätt på gåtan!");
-                            Write("Han ger dig en läkande trolldryck precis som utlovat...");
-                            ReadKey();
-                        }
-                        // Om svaret inte är korrekt skrivs meddelande ut
-                        else
-                        {
-                            Clear();
-                            WriteLine("Trollkarlen ser lite besviken ut och säger att det tyvärr inte var rätt");
-                            Write("svar, men att du är välkommen åter om du vill göra ett nytt försök...");
-                            ReadKey();
-                        }
+                            WriteLine($"Gåtan lyder: {randomRiddle.Text}");
+                            Write("\nSkriv ditt svar: ");
 
+                            // Lagrar svaret som gemener i en variabel
+                            string? answer = ReadLine()?.ToLower();
+
+                            // Om svaret är null, tomt eller blanksteg skrivs felmeddelande ut och en ny iteration av loopan startar
+                            if (string.IsNullOrWhiteSpace(answer))
+                            {
+                                Game.WriteInputErrorMessage();
+                            }
+                            // Om svaret inte är null, tomt eller blanksteg och svaret är korrekt ökas Potions med 1 och meddelande skrivs ut
+                            else
+                            {
+                                if (randomRiddle.Answer == answer || randomRiddle.AnswerOpt == answer)
+                                {
+                                    player.Potions += 1;
+                                    Clear();
+                                    WriteLine("Trollkarlen ler och säger att du har svarat rätt på gåtan!");
+                                    Write("Han ger dig en läkande trolldryck precis som utlovat...");
+                                    ReadKey();
+                                }
+                                // Om svaret inte är korrekt skrivs meddelande ut
+                                else
+                                {
+                                    Clear();
+                                    WriteLine("Trollkarlen ser lite besviken ut och säger att det tyvärr inte var rätt");
+                                    Write("svar, men att du är välkommen åter om du vill göra ett nytt försök...");
+                                    ReadKey();
+                                }
+                                // validInput sätts till true för att stoppa loopen
+                                validInput = true;
+                            }
+                        }
                         // validChoice sätts till true för att stoppa while-loopen
                         validChoice = true;
                         break;
