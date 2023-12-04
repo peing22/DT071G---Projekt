@@ -4,7 +4,7 @@ internal class LevelTwo : Level
     public LevelTwo(string name)
     {
         // Sätter värde på den ärvda Name-egenskapen
-        base.Name = name;
+        Name = name;
     }
 
     // Metod för att implementera den ärvda abstrakta metoden och skriva ut en beskrivning
@@ -37,7 +37,7 @@ internal class LevelTwo : Level
             };
 
             /*
-            Anropar klassmetod och skickar med argumenten Level-namn, spelaren, en referens
+            Anropar klassmetod och skickar med Level-namn, aktuell spelare, en referens
             till metoden Descript och variabeln som lagrar lexikonet av menyobjekt.
             */
             LevelMenu.DisplayMenu(Name!, player, Descript, menuItems);
@@ -59,26 +59,26 @@ internal class LevelTwo : Level
         else
         {
             Clear();
-            WriteLine("Du har lagt märke till något som liknar en gammal smedja bland ruinerna");
-            Write("och bestämmer dig för att gå dit...");
+            Game.Print("Du har lagt märke till något som liknar en gammal smedja bland ruinerna\n");
+            Game.Print("och bestämmer dig för att gå dit...");
             ReadKey();
             Clear();
-            WriteLine("När du närmar dig får du syn på en liten figur som ser ut att leta efter");
-            WriteLine("något. Den lilla figuren presenterar sig som Vendela och berättar att hon");
-            Write("arbetade som smed i staden innan de mystiska skuggorna dök upp...");
+            Game.Print("När du närmar dig får du syn på en liten figur som ser ut att leta efter\n");
+            Game.Print("något. Den lilla figuren presenterar sig som Vendela och berättar att hon\n");
+            Game.Print("arbetade som smed i staden innan de mystiska skuggorna dök upp...");
             ReadKey();
             Clear();
-            WriteLine("Du frågar Vendela om hon letar efter något. Hon svarar att hon försöker leta");
-            WriteLine("rätt på sina verktyg som blivit kvar i ruinerna, men att det enda hon har");
-            Write("hittat är den gamla slipmaskinen...");
+            Game.Print("Du frågar Vendela om hon letar efter något. Hon svarar att hon försöker leta\n");
+            Game.Print("rätt på sina verktyg som blivit kvar i ruinerna, men att det enda hon har\n");
+            Game.Print("hittat är den gamla slipmaskinen...");
             ReadKey();
             Clear();
-            WriteLine("Du ser din chans att få hjälp med ditt rostiga svärd och frågar Vendela om");
-            Write("hon har möjlighet att slipa det åt dig...");
+            Game.Print("Du ser din chans att få hjälp med ditt rostiga svärd och frågar Vendela om\n");
+            Game.Print("hon har möjlighet att slipa det åt dig...");
             ReadKey();
             Clear();
-            WriteLine("Vendela ler och säger att hon kan slipa ditt svärd om du lyckas räkna ut");
-            Write("svaret på ett matematiskt tal...");
+            Game.Print("Vendela ler och säger att hon kan slipa ditt svärd om du lyckas räkna ut\n");
+            Game.Print("svaret på ett matematiskt tal...");
             ReadKey();
 
             // Så länge validChoice är false körs while-loopen
@@ -177,8 +177,8 @@ internal class LevelTwo : Level
     {
         // Rensar konsol och skriver ut meddelande
         Clear();
-        WriteLine("När du tittar närmare på ruinerna ser du inskriptioner i vissa stenar.");
-        Write("Det verkar vara ledtrådar om de mystiska skuggorna...");
+        Game.Print("När du tittar närmare på ruinerna ser du inskriptioner i vissa stenar.\n");
+        Game.Print("Det verkar vara ledtrådar om de mystiska skuggorna...");
         ReadKey();
 
         // Så länge validChoice är false körs while-loopen
@@ -240,17 +240,17 @@ internal class LevelTwo : Level
     {
         // Rensar konsol och skriver ut meddelande
         Clear();
-        WriteLine("När du går omkring bland ruinerna får du syn på något som liknar");
-        Write("ett gammalt apotek...");
+        Game.Print("När du går omkring bland ruinerna får du syn på något som liknar\n");
+        Game.Print("ett gammalt apotek...");
         ReadKey();
         Clear();
-        WriteLine("På marken hittar du flaskor som påminner om den flaska med läkande");
-        Write("trolldryck som du fick av Eldrion vid stenporten...");
+        Game.Print("På marken hittar du flaskor som påminner om den flaska med läkande\n");
+        Game.Print("trolldryck som du fick av Eldrion vid stenporten...");
         ReadKey();
         Clear();
-        WriteLine("Du letar igenom flaskorna noggrant och blir överlycklig när du ");
-        WriteLine("inser att en av dem är en läkande trolldryck! Du stoppar den i");
-        Write("fickan och tänker att den kan komma till god användning...");
+        Game.Print("Du letar igenom flaskorna noggrant och blir glad när du inser att\n");
+        Game.Print("en av dem är en läkande trolldryck! Du stoppar den i fickan och\n");
+        Game.Print("tänker att den kan komma till god användning...");
         ReadKey();
 
         // Spelarens Potions ökas med 1
@@ -262,8 +262,8 @@ internal class LevelTwo : Level
     {
         // Rensar konsol och skriver ut meddelande
         Clear();
-        WriteLine("Under din vistelse bland ruinerna har du lagt extra märke till");
-        Write("en spöklik skugga som inte verkar uppskatta din närvaro...");
+        Game.Print("Under din vistelse bland ruinerna har du lagt extra märke till\n");
+        Game.Print("en spöklik skugga som inte verkar uppskatta din närvaro...");
         ReadKey();
 
         // Så länge validChoice är false körs while-loopen
@@ -287,8 +287,8 @@ internal class LevelTwo : Level
                     case 1:
                         // Rensar konsol och skriver ut meddelande
                         Clear();
-                        WriteLine("Du känner dig modig, drar fram ditt svärd och går med bestämda steg fram");
-                        Write("till din motståndare som ställer sig i stridsposition...");
+                        Game.Print("Du känner dig modig, drar fram ditt svärd och går med bestämda steg fram\n");
+                        Game.Print("till din motståndare som ställer sig i stridsposition...");
                         ReadKey();
 
                         // Skapar en instans av klassen "Creature"

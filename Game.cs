@@ -6,8 +6,8 @@ internal class Game
     // Skapar en statisk lista av Player-objekt
     private static List<Player> Players = new();
 
-    // Konstruktor som körs när en instans av klassen "Game" skapas
-    public Game()
+    // Statisk metod för att hämta sparade spel från JSON-fil
+    public static void GetSavedGames()
     {
         // Om JSON-filen existerar deserialiseras innehållet till listan med Player-objekt
         if (File.Exists("savedgames.json"))
@@ -112,9 +112,10 @@ internal class Game
                 {
                     WriteOptionErrorMessage();
                 }
-                // Om inmatning är ett korrekt alternativ och om valet är ett sparat spel
+                // Om inmatning är ett korrekt alternativ
                 else
                 {
+                    // Om valet är ett sparat spel
                     if (choice <= Players.Count)
                     {
                         // Lagrar det sparade spelets spelare i en variabel
@@ -153,7 +154,7 @@ internal class Game
             switch (level)
             {
                 case 1:
-                    // Skapar en ny instans av klassen "LevelOne" och skickar med namn
+                    // Skapar en ny instans av klassen "LevelOne" och skickar med level-namn
                     LevelOne levelOne = new("Level 1 - Skogens hemligheter");
 
                     // Skriver ut spelarstatus
@@ -163,7 +164,7 @@ internal class Game
                     levelOne.TaskMenu(player);
                     break;
                 case 2:
-                    // Skapar en ny instans av klassen "LevelTwo" och skickar med namn
+                    // Skapar en ny instans av klassen "LevelTwo" och skickar med level-namn
                     LevelTwo levelTwo = new("Level 2 - Förlorade ruiner");
 
                     // Skriver ut spelarstatus
@@ -192,13 +193,13 @@ internal class Game
     // Statisk metod för att spara ett spel
     public static void SaveGame(Player player)
     {
-        // Om spelaren redan existerar i listan med spelare, ersätts den befintliga instansen
+        // Om spelaren redan existerar i listan med Player-objekt, ersätts det befintliga objektet
         var existingPlayer = Players.Find(p => p.Id == player.Id);
         if (existingPlayer != null)
         {
             Players[Players.IndexOf(existingPlayer)] = player;
         }
-        // Om spelaren inte existerar adderas insatsen till listan med spelare
+        // Om spelaren inte existerar adderas spelaren till listan med Player-objekt
         else
         {
             Players.Add(player);
@@ -219,9 +220,6 @@ internal class Game
     {
         // Sätter level till 100 för att stoppa loopen som håller igång aktuellt spel
         player.Level = 100;
-        Clear();
-        Write("Spelet har avslutats...");
-        ReadKey();
     }
 
     // Statisk metod för att skriva ut meddelande om felaktigt alternativ

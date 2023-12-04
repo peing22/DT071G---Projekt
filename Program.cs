@@ -38,8 +38,8 @@ ReadKey();
 // Skapar en loop som håller igång spelmenyn tills programmet avslutas
 while (true)
 {
-    // Skapar en ny instans av klassen "Game" för att dennes konstruktor ska köras
-    Game game = new();
+    // Anropar klass-metod
+    Game.GetSavedGames();
 
     // Rensar konsol, skriver ut spelmeny och efterfrågar inmatning
     Clear();
@@ -51,7 +51,7 @@ while (true)
     WriteLine("3. Avsluta\n");
     Write("Välj ett alternativ (1-3): ");
 
-    // Om inmatning är en siffra körs switch-satsen där olika metoder anropas
+    // Om inmatning är en siffra körs switch-satsen där olika klass-metoder anropas
     if (int.TryParse(ReadLine(), out int choice))
     {
         switch (choice)

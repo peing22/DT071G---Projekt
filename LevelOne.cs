@@ -4,7 +4,7 @@ internal class LevelOne : Level
     public LevelOne(string name)
     {
         // Sätter värde på den ärvda Name-egenskapen
-        base.Name = name;
+        Name = name;
     }
 
     // Metod för att implementera den ärvda abstrakta metoden och skriva ut en beskrivning
@@ -34,7 +34,7 @@ internal class LevelOne : Level
             };
 
             /*
-            Anropar klassmetod och skickar med argumenten Level-namn, spelaren, en referens
+            Anropar klassmetod och skickar med Level-namn, aktuell spelare, en referens
             till metoden Descript och variabeln som lagrar lexikonet av menyobjekt.
             */
             LevelMenu.DisplayMenu(Name!, player, Descript, menuItems);
@@ -46,8 +46,8 @@ internal class LevelOne : Level
     {
         // Rensar konsol och skriver ut meddelande
         Clear();
-        WriteLine("Du närmar dig det viskande trädet och hör att det på något märkligt");
-        Write("sätt uttalar ord som du kan förstå, med ledtrådar om skuggorna...");
+        Game.Print("Du närmar dig det viskande trädet och hör att det på något märkligt\n");
+        Game.Print("sätt uttalar ord som du kan förstå, med ledtrådar om skuggorna...");
         ReadKey();
 
         // Så länge validChoice är false körs while-loopen
@@ -109,18 +109,18 @@ internal class LevelOne : Level
     {
         // Rensar konsol och skriver ut meddelande
         Clear();
-        WriteLine("Du beslutar dig för att besöka trollkarlens stuga. När du närmar");
-        WriteLine("dig öppnar trollkarlen dörren och hälsar dig välkommen. Han tittar");
-        Write("på dig med nyfikna ögon och undrar hur han kan stå till tjänst...");
+        Game.Print("Du beslutar dig för att besöka trollkarlens stuga. När du närmar\n");
+        Game.Print("dig öppnar trollkarlen dörren och hälsar dig välkommen. Han tittar\n");
+        Game.Print("på dig med nyfikna ögon och undrar hur han kan stå till tjänst...");
         ReadKey();
         Clear();
-        WriteLine("Du frågar om trollkarlen har någon läkande trolldryck som han kan");
-        Write("tänka sig att ge till dig...");
+        Game.Print("Du frågar om trollkarlen har någon läkande trolldryck som han kan\n");
+        Game.Print("tänka sig att ge till dig...");
         ReadKey();
         Clear();
-        WriteLine("Trollkarlen skrattar och säger att han har många olika trolldrycker");
-        WriteLine("i sin stuga. Han lovar att ge dig en läkande trolldryck om du kan");
-        Write("svara rätt på en av hans gåtor...");
+        Game.Print("Trollkarlen skrattar och säger att han har många olika trolldrycker\n");
+        Game.Print("i sin stuga. Han lovar att ge dig en läkande trolldryck om du kan\n");
+        Game.Print("svara rätt på en av hans gåtor...");
         ReadKey();
 
         // Så länge validChoice är false körs while-loopen
@@ -151,7 +151,7 @@ internal class LevelOne : Level
                         {
                             // Rensar konsol, skriver ut gåta och efterfrågar svar
                             Clear();
-                            WriteLine($"Gåtan lyder: {randomRiddle.Text}");
+                            WriteLine($"{randomRiddle.Text}");
                             Write("\nSkriv ditt svar: ");
 
                             // Lagrar svaret som gemener i en variabel
@@ -215,12 +215,12 @@ internal class LevelOne : Level
     {
         // Rensar konsol och skriver ut meddelande
         Clear();
-        WriteLine("Under din vistelse i skogen har du lagt märke till att det smyger");
-        Write("omkring en mystisk skugga bland träden...");
+        Game.Print("Under din vistelse i skogen har du lagt märke till att det smyger\n");
+        Game.Print("omkring en mystisk skugga bland träden...");
         ReadKey();
         Clear();
-        WriteLine($"När du närmar dig den smygande skuggan märker du att den blir hotfull,");
-        Write("som att den tänker gå till attack om du kommer för nära...");
+        Game.Print($"När du närmar dig den smygande skuggan märker du att den blir hotfull,\n");
+        Game.Print("som att den tänker gå till attack om du kommer för nära...");
         ReadKey();
 
         // Så länge validChoice är false körs while-loopen
@@ -244,8 +244,8 @@ internal class LevelOne : Level
                     case 1:
                         // Rensar konsol och skriver ut meddelande
                         Clear();
-                        WriteLine("Du känner dig modig, drar fram ditt svärd och går med bestämda steg fram");
-                        Write("till din motståndare som väser hotfullt och gör sig redo för strid...");
+                        Game.Print("Du känner dig modig, drar fram ditt svärd och går med bestämda steg fram\n");
+                        Game.Print("till din motståndare som väser hotfullt och gör sig redo för strid...");
                         ReadKey();
 
                         // Skapar en instans av klassen "Creature"

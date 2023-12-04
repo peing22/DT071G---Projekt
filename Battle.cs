@@ -160,15 +160,15 @@ internal class Battle
         {
             player.Xp += creature.XpValue;
             Clear();
-            WriteLine($"Det var en tuff strid, men du har besegrat den {creature.Name!.ToLower()}!");
-            Write($"Dina erfarenhetspoäng (XP) ökar med {creature.XpValue}...");
+            Game.Print($"Det var en tuff strid, men du har besegrat den {creature.Name!.ToLower()}!\n");
+            Game.Print($"Dina erfarenhetspoäng (XP) ökar med {creature.XpValue}...");
             ReadKey();
         }
         // Om spelaren inte lever skrivs meddelande ut och spelet avslutas
         else if (!player.IsAlive())
         {
             Clear();
-            Write($"Den {creature.Name!.ToLower()} har besegrat dig och du är död...");
+            Game.Print($"Den {creature.Name!.ToLower()} har besegrat dig och du är död...");
             ReadKey();
             Game.QuitGame(player);
         }
