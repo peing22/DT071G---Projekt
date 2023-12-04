@@ -46,7 +46,7 @@ internal class LevelThree : Level
         }
     }
 
-    // Statisk metod för att utforska ödemarken
+    // Statisk metod för att utforska ödemarkens källa
     private static void ExploreSpringOfWasteland(Player player)
     {
         // Om spelaren redan har fått sitt svärd uppdaterat
@@ -54,7 +54,7 @@ internal class LevelThree : Level
         {
             // Rensar konsol och skriver ut meddelande
             Clear();
-            Write("Du har redan utforskat ödemarkens källa...");
+            Game.Print("Du har redan utforskat ödemarkens källa...");
             ReadKey();
         }
         // Om spelaren inte har fått sitt svärd uppdaterat rensas konsolen och meddelande skrivs ut
@@ -293,8 +293,8 @@ internal class LevelThree : Level
         {
             // Rensar konsol och skriver ut meddelande
             Clear();
-            WriteLine("Du har inte tillräckligt med erfarenhetspoäng för att kunna utmana");
-            WriteLine("den härskande skuggan. Återkom när din XP-indikator är full...");
+            Game.Print("Du har inte tillräckligt med erfarenhetspoäng för att kunna utmana\n");
+            Game.Print("den härskande skuggan. Återkom när din XP-indikator är full...");
             ReadKey();
         }
         // Om XP är större eller lika med 100

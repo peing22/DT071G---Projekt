@@ -59,7 +59,7 @@ internal class Game
                 Print("värld där skuggorna tycks leva sitt eget liv...");
                 ReadKey();
                 Clear();
-                Print("Vid stenporten möter du den mystiska figuren Eldrion, väktaren av skogen.\n");
+                Print("Vid stenporten möter du den modfällda figuren Eldrion, väktaren av skogen.\n");
                 Print("Han berättar att skogen har förändrats den senaste tiden och att han inte\n");
                 Print("vet hur han ska kunna bli av med de mystiska skuggorna...");
                 ReadKey();

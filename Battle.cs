@@ -185,7 +185,7 @@ internal class Battle
             ReadKey();
             Clear();
             ForegroundColor = ConsoleColor.Cyan;
-            Game.Print("Du har löst mysteriet med de mystiska skuggorna!");
+            Write("Du har löst mysteriet med de mystiska skuggorna!");
             ResetColor();
             ReadKey();
             Game.QuitGame(player);
@@ -195,6 +195,11 @@ internal class Battle
         {
             Clear();
             Game.Print($"Den {creature.Name!.ToLower()} har besegrat dig och du är död...");
+            ReadKey();
+            Clear();
+            ForegroundColor = ConsoleColor.DarkRed;
+            Write("Game over");
+            ResetColor();
             ReadKey();
             Game.QuitGame(player);
         }

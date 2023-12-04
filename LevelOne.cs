@@ -75,19 +75,14 @@ internal class LevelOne : Level
 
                         // Rensar konsol och skriver ut meddelande
                         Clear();
-                        WriteLine("Du lyssnar uppmärksamt och får ledtrådar om hur du ska kunna lösa");
-                        Write($"skuggornas mysterium. Dina erfarenhetspoäng (XP) ökar med {gainedXp}...");
+                        Game.Print("Du lyssnar uppmärksamt och får ledtrådar om hur du ska kunna lösa\n");
+                        Game.Print($"skuggornas mysterium. Dina erfarenhetspoäng (XP) ökar med {gainedXp}...");
                         ReadKey();
 
                         // validChoice sätts till true för att stoppa while-loopen
                         validChoice = true;
                         break;
                     case 2:
-                        // Rensar konsol och skriver ut meddelande
-                        Clear();
-                        Write("Du väljer att gå därifrån...");
-                        ReadKey();
-
                         // validChoice sätts till true för att stoppa while-loopen
                         validChoice = true;
                         break;
@@ -169,16 +164,16 @@ internal class LevelOne : Level
                                 {
                                     player.Potions += 1;
                                     Clear();
-                                    WriteLine("Trollkarlen ler och säger att du har svarat rätt på gåtan!");
-                                    Write("Han ger dig en läkande trolldryck precis som utlovat...");
+                                    Game.Print("Trollkarlen ler och säger att du har svarat rätt på gåtan!\n");
+                                    Game.Print("Han ger dig en läkande trolldryck precis som utlovat...");
                                     ReadKey();
                                 }
                                 // Om svaret inte är korrekt skrivs meddelande ut
                                 else
                                 {
                                     Clear();
-                                    WriteLine("Trollkarlen ser lite besviken ut och säger att det tyvärr inte var rätt");
-                                    Write("svar, men att du är välkommen åter om du vill göra ett nytt försök...");
+                                    Game.Print("Trollkarlen ser lite besviken ut och säger att det tyvärr inte var rätt\n");
+                                    Game.Print("svar, men att du är välkommen åter om du vill göra ett nytt försök...");
                                     ReadKey();
                                 }
                                 // validInput sätts till true för att stoppa loopen
@@ -189,11 +184,6 @@ internal class LevelOne : Level
                         validChoice = true;
                         break;
                     case 2:
-                        // Rensar konsol och skriver ut meddelande
-                        Clear();
-                        Write("Du tackar nej och går därifrån...");
-                        ReadKey();
-
                         // validChoice sätts till true för att stoppa while-loopen
                         validChoice = true;
                         break;
@@ -249,7 +239,7 @@ internal class LevelOne : Level
                         ReadKey();
 
                         // Skapar en instans av klassen "Creature"
-                        Creature sneakyShadow = new("Smygande skuggan", 5, 1, 70);
+                        Creature sneakyShadow = new("Smygande skuggan", 5, 1, 80);
 
                         // Anropar metod för att starta strid
                         Battle.StartBattle(player, sneakyShadow);
@@ -258,11 +248,6 @@ internal class LevelOne : Level
                         validChoice = true;
                         break;
                     case 2:
-                        // Rensar konsol och skriver ut meddelande
-                        Clear();
-                        Write($"Du känner dig inte redo för att utmana den smygande skuggan...");
-                        ReadKey();
-
                         // validChoice sätts till true för att stoppa while-loopen
                         validChoice = true;
                         break;

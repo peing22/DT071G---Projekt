@@ -52,7 +52,7 @@ internal class LevelTwo : Level
         {
             // Rensar konsol och skriver ut meddelande
             Clear();
-            Write("Du har redan fått hjälp med ditt svärd och Vendela är inte längre kvar...");
+            Game.Print("Du har redan fått hjälp med ditt svärd och Vendela är inte längre kvar...");
             ReadKey();
         }
         // Om spelaren inte har fått sitt svärd slipat rensas konsolen och meddelande skrivs ut
@@ -124,16 +124,16 @@ internal class LevelTwo : Level
                                     {
                                         player.WeaponStrength = 3;
                                         Clear();
-                                        WriteLine($"Vendela säger att du är smart och att svaret {result} är rätt! Hon");
-                                        Write("hjälper dig att slipa ditt svärd, vilket ökar dess styrka...");
+                                        Game.Print($"Vendela säger att du är smart och att svaret {result} är rätt! Hon\n");
+                                        Game.Print("hjälper dig att slipa ditt svärd, vilket ökar dess styrka...");
                                         ReadKey();
                                     }
                                     // Om svaret inte är korrekt skrivs meddelande ut
                                     else
                                     {
                                         Clear();
-                                        WriteLine($"Vendela ser lite besviken ut och säger att rätt svar är {correctAnswer}.");
-                                        Write("Du svarade fel, men är välkommen åter för ett nytt försök...");
+                                        Game.Print($"Vendela ser lite besviken ut och säger att rätt svar är {correctAnswer}.\n");
+                                        Game.Print("Du svarade fel, men är välkommen åter för ett nytt försök...");
                                         ReadKey();
                                     }
 
@@ -150,11 +150,6 @@ internal class LevelTwo : Level
                             validChoice = true;
                             break;
                         case 2:
-                            // Rensar konsol och skriver ut meddelande
-                            Clear();
-                            Write("Du känner inte för att räkna ut ett tal just nu och går därifrån...");
-                            ReadKey();
-
                             // validChoice sätts till true för att stoppa while-loopen
                             validChoice = true;
                             break;
@@ -206,19 +201,14 @@ internal class LevelTwo : Level
 
                         // Rensar konsol och skriver ut meddelande
                         Clear();
-                        WriteLine("Du studerar inskriptionerna noggrant och hittar ledtrådar om hur du ska kunna");
-                        Write($"lösa skuggornas mysterium. Dina erfarenhetspoäng (XP) ökar med {gainedXp}...");
+                        Game.Print("Du studerar inskriptionerna noggrant och hittar ledtrådar om hur du ska kunna\n");
+                        Game.Print($"lösa skuggornas mysterium. Dina erfarenhetspoäng (XP) ökar med {gainedXp}...");
                         ReadKey();
 
                         // validChoice sätts till true för att stoppa while-loopen
                         validChoice = true;
                         break;
                     case 2:
-                        // Rensar konsol och skriver ut meddelande
-                        Clear();
-                        Write("Du tycker inte att du har tid med det just nu...");
-                        ReadKey();
-
                         // validChoice sätts till true för att stoppa while-loopen
                         validChoice = true;
                         break;
@@ -292,7 +282,7 @@ internal class LevelTwo : Level
                         ReadKey();
 
                         // Skapar en instans av klassen "Creature"
-                        Creature ghostlyShadow = new("Spöklika skuggan", 8, 4, 75);
+                        Creature ghostlyShadow = new("Spöklika skuggan", 8, 4, 90);
 
                         // Anropar metod för att starta strid
                         Battle.StartBattle(player, ghostlyShadow);
@@ -301,11 +291,6 @@ internal class LevelTwo : Level
                         validChoice = true;
                         break;
                     case 2:
-                        // Rensar konsol och skriver ut meddelande
-                        Clear();
-                        Write($"Du känner dig inte redo för att utmana den spöklika skuggan...");
-                        ReadKey();
-
                         // validChoice sätts till true för att stoppa while-loopen
                         validChoice = true;
                         break;
