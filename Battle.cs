@@ -1,6 +1,6 @@
 internal class Battle
 {
-    // Skapar en fältvariabel med en instans av kalssen "Random"
+    // Skapar en fältvariabel med en instans av klassen "Random"
     private static readonly Random random = new();
 
     // Statisk metod för starta en strid
@@ -155,14 +155,40 @@ internal class Battle
     // Statisk metod för att hantera utfallet av striden
     private static void BattleOutcome(Player player, Creature creature)
     {
-        // Om varelsen inte lever ökas spelarens XP, konsolen rensas och meddelande skrivs ut
-        if (!creature.IsAlive())
+        // Om varelsen inte lever och spelarens level är mindre än 3 ökas spelarens XP, konsolen rensas och meddelande skrivs ut
+        if (!creature.IsAlive() && player.Level < 3)
         {
             player.Xp += creature.XpValue;
             Clear();
             Game.Print($"Det var en tuff strid, men du har besegrat den {creature.Name!.ToLower()}!\n");
             Game.Print($"Dina erfarenhetspoäng (XP) ökar med {creature.XpValue}...");
             ReadKey();
+        }
+        // Om varelsen inte lever och spelarens level är 3 rensas konsolen, meddelande skrivs ut och spelet avslutas
+        else if (!creature.IsAlive() && player.Level == 3)
+        {
+            Clear();
+            Game.Print($"Den {creature.Name!.ToLower()} ger ifrån sig ett isande skrik innan den\n");
+            Game.Print("gradvis löses upp och försvinner för gott...");
+            ReadKey();
+            Clear();
+            Game.Print("Sårad men lättad över segern, ser du dig omkring och upptäcker Eldrion,\n");
+            Game.Print("trollkarlen, Vendela och flera andra skogsinvånare som kommer emot dig\n");
+            Game.Print("med hurrarop och segersång...");
+            ReadKey();
+            Clear();
+            Game.Print($"Eldrion berättar att i samma stund som den {creature.Name!.ToLower()} gav ifrån sig\n");
+            Game.Print("sitt isande skrik, återgick skogen till sitt normala tillstånd...");
+            ReadKey();
+            Clear();
+            Game.Print("Eldrion tackar dig för ditt hjältemod och för din välvilja...");
+            ReadKey();
+            Clear();
+            ForegroundColor = ConsoleColor.Cyan;
+            Game.Print("Du har löst mysteriet med de mystiska skuggorna!");
+            ResetColor();
+            ReadKey();
+            Game.QuitGame(player);
         }
         // Om spelaren inte lever skrivs meddelande ut och spelet avslutas
         else if (!player.IsAlive())

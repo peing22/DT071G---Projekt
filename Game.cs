@@ -174,14 +174,14 @@ internal class Game
                     levelTwo.TaskMenu(player);
                     break;
                 case 3:
-                    Clear();
-                    Write("Level 3...");
-                    ReadKey();
-                    break;
-                case 4:
-                    Clear();
-                    Write("Level 4...");
-                    ReadKey();
+                    // Skapar en ny instans av klassen "LevelThree" och skickar med level-namn
+                    LevelThree levelThree = new("Level 3 - Den sista striden");
+
+                    // Skriver ut spelarstatus
+                    player.PlayerStatus();
+
+                    // Anropar klass-metod
+                    levelThree.TaskMenu(player);
                     break;
                 case 100:
                     activeGame = false;

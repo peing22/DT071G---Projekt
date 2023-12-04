@@ -87,8 +87,8 @@ internal class Player
     // Metod för att ta reda på om spelaren kan nå nästa level
     public bool CanLevelUp()
     {
-        // Om Xp är större än eller lika med 100 returneras true, annars false
-        if (Xp >= 100) { return true; }
+        // Om Xp är större än eller lika med 100 och level är mindre än 3 returneras true, annars false
+        if (Xp >= 100 && Level < 3) { return true; }
         else { return false; }
     }
 

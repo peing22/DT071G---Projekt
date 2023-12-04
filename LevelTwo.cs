@@ -119,10 +119,10 @@ internal class LevelTwo : Level
                                     // Beräknar det korrekta svaret
                                     int correctAnswer = number1 * number2;
 
-                                    // Om svaret är korrekt uppdateras WeaponStrenght med 2
+                                    // Om svaret är korrekt uppdateras WeaponStrenght till 3
                                     if (result == correctAnswer)
                                     {
-                                        player.WeaponStrength += 2;
+                                        player.WeaponStrength = 3;
                                         Clear();
                                         WriteLine($"Vendela säger att du är smart och att svaret {result} är rätt! Hon");
                                         Write("hjälper dig att slipa ditt svärd, vilket ökar dess styrka...");

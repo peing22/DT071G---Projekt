@@ -16,8 +16,11 @@ internal class LevelMenu
             case 2:
                 Write($"            ");
                 break;
+            case 3:
+                Write($"           ");
+                break;
         }
-        Write($"XP-indikator ");
+        Write("XP-indikator ");
         player.XpIndicator();
         WriteLine("-----------------------------------------------------------------\n");
 
