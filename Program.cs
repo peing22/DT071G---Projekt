@@ -28,7 +28,7 @@ ForegroundColor = ConsoleColor.DarkGray;
 WriteLine(title);
 ResetColor();
 
-// Döljer cursor
+// Döljer cursorpositionen i konsolen
 CursorVisible = false;
 
 // Ber användaren trycka på valfri tangent för att komma vidare
