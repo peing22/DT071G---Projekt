@@ -1,4 +1,4 @@
-internal class Battle
+static class Battle
 {
     // Skapar en fältvariabel med en instans av klassen "Random"
     private static readonly Random random = new();

@@ -1,4 +1,4 @@
-internal class LevelMenu
+static class LevelMenu
 {
     // Statisk metod för att visa levelmenyn
     public static void DisplayMenu(string name, Player player, Action description, Dictionary<int, MenuItem> menuItems)

@@ -1,4 +1,4 @@
-﻿// Importerar klass globalt för att slippa upprepa "Console"
+﻿// Importerar namespace-klass globalt för att slippa upprepa "Console"
 global using static System.Console;
 
 // Rensar konsol och lagrar en ASCII-designad textsträng i en variabel

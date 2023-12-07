@@ -1,4 +1,4 @@
-internal abstract class Level 
+abstract class Level 
 { 
     // Egenskap av typen string som kan returnera och tilldelas ett värde
     public string? Name { get; set; }

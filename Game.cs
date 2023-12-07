@@ -1,7 +1,7 @@
 // Importerar namespace för att hantera konvertering mellan JSON och objekt
 using System.Text.Json;
 
-internal class Game
+static class Game
 {
     // Skapar en statisk lista av Player-objekt
     private static List<Player> Players = new();

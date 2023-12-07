@@ -2,7 +2,7 @@ internal class Player
 {
     // Egenskaper av typerna integer och string som kan returnera och tilldelas värden
     public int Id { get; set; }
-    public string? Name { get; set; }
+    public string Name { get; set; }
     public int Level { get; set; }
     public int Xp { get; set; }
     public int Health { get; set; }
