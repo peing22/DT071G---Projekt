@@ -173,8 +173,7 @@ static class Battle
             ReadKey();
             Clear();
             Game.Print("Sårad men lättad över segern, ser du dig omkring och upptäcker Eldrion,\n");
-            Game.Print("trollkarlen, Vendela och flera andra skogsinvånare som kommer emot dig\n");
-            Game.Print("med hurrarop och segersång...");
+            Game.Print("Vendela och flera andra skogsinvånare komma emot dig med hurrarop...");
             ReadKey();
             Clear();
             Game.Print($"Eldrion berättar att i samma stund som den {creature.Name!.ToLower()} gav ifrån sig\n");

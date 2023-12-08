@@ -1,4 +1,4 @@
-internal class MenuItem
+internal class LevelOption
 {
     // Egenskap av typen string som kan returnera ett värde
     public string Description { get; }
@@ -7,7 +7,7 @@ internal class MenuItem
     public Action Action { get; }
 
     // Konstruktor som tilldelar egenskaperna värden när en instans av klassen skapas
-    public MenuItem(string description, Action action)
+    public LevelOption(string description, Action action)
     {
         Description = description;
         Action = action;

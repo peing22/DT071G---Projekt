@@ -16,31 +16,31 @@ internal class LevelTwo : Level
         WriteLine("närmare lösningen på mysteriet med de mystiska skuggorna.\n");
     }
 
-    // Metod för att implementera den ärvda abstrakta metoden och skriva ut en meny med olika val
-    public override void TaskMenu(Player player)
+    // Metod för att implementera den ärvda abstrakta metoden och skriva ut ett gränssnitt
+    public override void Interface(Player player)
     {
         // Skapar en loop som körs så länge spelarens level är 2
         while (player.Level == 2)
         {
-            // Skapar ett lexikon av menyobjekt som lagras i en variabel
-            var menuItems = new Dictionary<int, MenuItem>
+            // Skapar ett lexikon av level-alternativ-objekt som lagras i en variabel
+            var levelOptions = new Dictionary<int, LevelOption>
             {
                 /* 
-                Varje menyobjekt associeras med en numerisk nyckel som motsvarar ett 
-                menyalternativ. Varje instans av MenuItem har en beskrivning och en
+                Varje objekt associeras med en numerisk nyckel som motsvarar ett 
+                alternativ. Varje instans av LevelOption har en beskrivning och en
                 referens till en metod.
                 */
-                { 1, new MenuItem("Besöka den forntida smedjan", () => VisitAncientForge(player)) },
-                { 2, new MenuItem("Granska ruinernas inskriptioner", () => ExamineTheInscriptions(player)) },
-                { 3, new MenuItem("Utforska det gamla apoteket", () => ExploreTheOldPharmacy(player)) },
-                { 4, new MenuItem("Utmana den spöklika skuggan", () => ChallengeGhostlyShadow(player)) }
+                { 1, new LevelOption("Besöka den forntida smedjan", () => VisitAncientForge(player)) },
+                { 2, new LevelOption("Granska ruinernas inskriptioner", () => ExamineTheInscriptions(player)) },
+                { 3, new LevelOption("Utforska det gamla apoteket", () => ExploreTheOldPharmacy(player)) },
+                { 4, new LevelOption("Utmana den spöklika skuggan", () => ChallengeGhostlyShadow(player)) }
             };
 
             /*
             Anropar klassmetod och skickar med Level-namn, aktuell spelare, en referens
-            till metoden Descript och variabeln som lagrar lexikonet av menyobjekt.
+            till metoden Descript och variabeln som lagrar lexikonet av objekt.
             */
-            LevelMenu.DisplayMenu(Name!, player, Descript, menuItems);
+            LevelInterface.Display(Name!, player, Descript, levelOptions);
         }
     }
 

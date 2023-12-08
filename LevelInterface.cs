@@ -1,7 +1,7 @@
-static class LevelMenu
+static class LevelInterface
 {
-    // Statisk metod för att visa levelmenyn
-    public static void DisplayMenu(string name, Player player, Action description, Dictionary<int, MenuItem> menuItems)
+    // Statisk metod för att visa level-gränssnitt
+    public static void Display(string name, Player player, Action description, Dictionary<int, LevelOption> levelOptions)
     {
         // Rensar konsol och skriver ut namn och XP-indikator
         Clear();
@@ -28,42 +28,42 @@ static class LevelMenu
         description?.Invoke();
         WriteLine("Vad vill du göra?\n");
 
-        // Loopar igenom varje menyobjekt i lexikonet av menyobjekt
-        foreach (var menuItem in menuItems)
+        // Loopar igenom varje objekt i lexikonet av level-alternativ
+        foreach (var levelOption in levelOptions)
             {
-                // Skriver ut menyobjektets numeriska nyckel och beskrivning
-                WriteLine($"{menuItem.Key}. {menuItem.Value.Description}");
+                // Skriver ut objektets numeriska nyckel och beskrivning
+                WriteLine($"{levelOption.Key}. {levelOption.Value.Description}");
             }
 
-        // Skriver ut extra menyalternativ som inte ingår i lexikonet av menyobjekt
-        WriteLine($"{menuItems.Count + 1}. Dricka en läkande trolldryck");
-        WriteLine($"{menuItems.Count + 2}. Se din aktuella status");
-        WriteLine($"{menuItems.Count + 3}. Spara spelet");
-        WriteLine($"{menuItems.Count + 4}. Avsluta\n");
+        // Skriver ut extra alternativ som inte ingår i lexikonet av objekt
+        WriteLine($"{levelOptions.Count + 1}. Dricka en läkande trolldryck");
+        WriteLine($"{levelOptions.Count + 2}. Se din aktuella status");
+        WriteLine($"{levelOptions.Count + 3}. Spara spelet");
+        WriteLine($"{levelOptions.Count + 4}. Avsluta\n");
 
         // Efterfrågar inmatning
-        Write("Välj ett alternativ (1-" + (menuItems.Count + 4) + "): ");
+        Write("Välj ett alternativ (1-" + (levelOptions.Count + 4) + "): ");
 
         // Om inmatningen är en siffra anropas den metod som matchar spelarens val
         if (int.TryParse(ReadLine(), out int choice))
         {
-            if (choice >= 1 && choice <= menuItems.Count)
+            if (choice >= 1 && choice <= levelOptions.Count)
             {
-                menuItems[choice]?.Action?.Invoke();
+                levelOptions[choice]?.Action?.Invoke();
             }
-            else if (choice == menuItems.Count + 1)
+            else if (choice == levelOptions.Count + 1)
             {
                 player.DrinkPotion();
             }
-            else if (choice == menuItems.Count + 2)
+            else if (choice == levelOptions.Count + 2)
             {
                 player.PlayerStatus();
             }
-            else if (choice == menuItems.Count + 3)
+            else if (choice == levelOptions.Count + 3)
             {
                 Game.SaveGame(player);
             }
-            else if (choice == menuItems.Count + 4)
+            else if (choice == levelOptions.Count + 4)
             {
                 Game.QuitGame(player);
             }

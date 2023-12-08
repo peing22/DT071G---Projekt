@@ -161,7 +161,7 @@ static class Game
                     player.PlayerStatus();
 
                     // Anropar klass-metod
-                    levelOne.TaskMenu(player);
+                    levelOne.Interface(player);
                     break;
                 case 2:
                     // Skapar en ny instans av klassen "LevelTwo" och skickar med level-namn
@@ -171,7 +171,7 @@ static class Game
                     player.PlayerStatus();
 
                     // Anropar klass-metod
-                    levelTwo.TaskMenu(player);
+                    levelTwo.Interface(player);
                     break;
                 case 3:
                     // Skapar en ny instans av klassen "LevelThree" och skickar med level-namn
@@ -181,7 +181,7 @@ static class Game
                     player.PlayerStatus();
 
                     // Anropar klass-metod
-                    levelThree.TaskMenu(player);
+                    levelThree.Interface(player);
                     break;
                 case 100:
                     activeGame = false;
