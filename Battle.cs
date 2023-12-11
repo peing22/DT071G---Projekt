@@ -197,7 +197,7 @@ static class Battle
             ReadKey();
             Clear();
             ForegroundColor = ConsoleColor.DarkRed;
-            Write("Game over");
+            Write("Game over!");
             ResetColor();
             ReadKey();
             Game.QuitGame(player);
