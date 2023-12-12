@@ -196,7 +196,7 @@ static class Battle
             Game.Print($"Den {creature.Name!.ToLower()} har besegrat dig och du är död...");
             ReadKey();
             Clear();
-            ForegroundColor = ConsoleColor.DarkRed;
+            ForegroundColor = ConsoleColor.Red;
             Write("Game over!");
             ResetColor();
             ReadKey();

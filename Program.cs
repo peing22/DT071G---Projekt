@@ -4,6 +4,8 @@ global using static System.Console;
 // Rensar konsol och lagrar en ASCII-designad textsträng i en variabel
 Clear();
 string title = @"
+
+
    ██████  ██ ▄█▀ █    ██   ▄████   ▄████  ▒█████   ██▀███   ███▄    █  ▄▄▄        ██████    
  ▒██    ▒  ██▄█▒  ██  ▓██▒ ██▒ ▀█▒ ██▒ ▀█▒▒██▒  ██▒▓██ ▒ ██▒ ██ ▀█   █ ▒████▄    ▒██    ▒    
  ░ ▓██▄   ▓███▄░ ▓██  ▒██░▒██░▄▄▄░▒██░▄▄▄░▒██░  ██▒▓██ ░▄█ ▒▓██  ▀█ ██▒▒██  ▀█▄  ░ ▓██▄      
