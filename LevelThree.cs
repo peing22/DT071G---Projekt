@@ -221,7 +221,7 @@ internal class LevelThree : Level
                         else
                         {
                             // Genererar två slumpmässiga tal
-                            int number1 = random.Next(6, 10);
+                            int number1 = random.Next(3, 10);
                             int number2 = random.Next(3, 10);
 
                             // Så länge validInput är false körs while-loopen
